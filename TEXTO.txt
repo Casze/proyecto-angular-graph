@@ -1,5 +1,10 @@
 Graph desde 0
 https://www.youtube.com/watch?v=WvV4Nv1MsYk
 
+https://www.youtube.com/watch?v=dy6GEHWLwrs&list=PL_9MDdjVuFjEOzJauNEz6_YfBuU5JREph&index=1
+
 Login
 https://www.youtube.com/watch?v=jkdLRbrJj9M
+
+doc
+https://www.npmjs.com/package/apollo-angular
