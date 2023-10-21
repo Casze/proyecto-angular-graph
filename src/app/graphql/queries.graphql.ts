@@ -34,7 +34,7 @@ const mutation_Register = gql`
     }
   }
 `;
-
+/*
 const query_ProductsByUser = gql`
   query ProductsByUser($name: String!) {
     productsByUser(name: $name) {
@@ -94,14 +94,14 @@ const mutation_DeleteProduct = gql`
     deleteProduct(id: $id)
   }
 `;
-
+*/
 export {
-    query_GetAllProducts,
-    query_GetAllUser,
-    query_ProductsByUser,
+    query_GetAllProducts, // Listo
+    query_GetAllUser,  // Listo
+    //query_ProductsByUser,
 
-    mutation_Register,
-    mutation_CreateProduct,
-    mutation_UpdateProduct,
-    mutation_DeleteProduct,
+    mutation_Register, // Listo
+    //mutation_CreateProduct,
+    //mutation_UpdateProduct,
+    //mutation_DeleteProduct
     }

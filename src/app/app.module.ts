@@ -12,6 +12,8 @@ import { PrimengModule } from './primeng/primeng.module';
 import { DashboardComponent } from './page/dashboard/dashboard.component';
 import { LoginComponent } from './page/login/login.component';
 import { HeaderComponent } from './shader/header/header.component';
+import { RegisterComponent } from './components/register/register.component';
+import { AdminComponent } from './components/admin/admin.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,9 @@ import { HeaderComponent } from './shader/header/header.component';
     UserComponent,
     DashboardComponent,
     LoginComponent,
-    HeaderComponent
+    HeaderComponent,
+    RegisterComponent,
+    AdminComponent
   ],
   imports: [
     BrowserModule,
@@ -28,7 +32,7 @@ import { HeaderComponent } from './shader/header/header.component';
     GraphQLModule,
     HttpClientModule,
     FormsModule,
-    PrimengModule
+    PrimengModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -54,6 +54,7 @@ export class ProductComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.querySubscription.unsubscribe();
+    this.querySubscriptionUsers.unsubscribe();
   }
 
 }
