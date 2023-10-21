@@ -17,15 +17,91 @@ const query_GetAllProducts = gql`
 `;
 const query_GetAllUser = gql`
     query {
-        products{
-        id,
-        name,
-        category,
-        price,
-        description,
-        image
+        users {
+        id
+        name
+        email
+        password    
         }
     }
 `;
 
-export {query_GetAllProducts,query_GetAllUser}
+const mutation_Register = gql`
+  mutation Register($name: String!, $password: String!) {
+    register(input: { name: $name, password: $password }) {
+      name
+      password
+    }
+  }
+`;
+
+const query_ProductsByUser = gql`
+  query ProductsByUser($name: String!) {
+    productsByUser(name: $name) {
+      id
+      name
+      category
+      price
+      description
+      image
+      username
+      user {
+        // Si también necesitas campos del tipo User, agrégalos aquí
+      }
+    }
+  }
+`;
+
+const mutation_CreateProduct = gql`
+  mutation CreateProduct($productsInput: CreateProductInput!) {
+    createProduct(productsInput: $productsInput) {
+      id
+      name
+      category
+      price
+      description
+      image
+      username
+      user {
+        id
+        name
+        email
+      }
+    }
+  }
+`;
+
+const mutation_UpdateProduct = gql`
+  mutation UpdateProduct($id: Int!, $updateProductInput: UpdateProductInput!) {
+    updateProduct(id: $id, updateProductInput: $updateProductInput) {
+      id
+      name
+      category
+      price
+      description
+      image
+      username
+      user {
+        id
+        name
+        email
+      }
+    }
+  }
+`;
+const mutation_DeleteProduct = gql`
+  mutation DeleteProduct($id: Int!) {
+    deleteProduct(id: $id)
+  }
+`;
+
+export {
+    query_GetAllProducts,
+    query_GetAllUser,
+    query_ProductsByUser,
+
+    mutation_Register,
+    mutation_CreateProduct,
+    mutation_UpdateProduct,
+    mutation_DeleteProduct,
+    }
