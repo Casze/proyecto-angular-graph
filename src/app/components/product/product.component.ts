@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Apollo } from 'apollo-angular';
 import { Subscription } from 'rxjs';
-import { GetAllProducts } from 'src/app/graphql/queries.graphql';
+import { query_GetAllProducts } from 'src/app/graphql/queries.graphql';
 
 @Component({
   selector: 'app-product',
@@ -11,7 +11,7 @@ import { GetAllProducts } from 'src/app/graphql/queries.graphql';
 export class ProductComponent implements OnInit, OnDestroy {
 
   loading: boolean;
-  product: any;
+  getAllProducts: any;
 
   private querySubscription: Subscription;
 
@@ -24,11 +24,12 @@ export class ProductComponent implements OnInit, OnDestroy {
   loadProducts(): void {
     this.querySubscription = this.apollo
       .watchQuery<any>({
-        query: GetAllProducts,
+        query: query_GetAllProducts,
       })
       .valueChanges.subscribe(({ data, loading }) => {
         this.loading = loading;
-        console.log(data);
+        console.log(data.products);
+        this.getAllProducts = data.products;
       });
   }
 

@@ -8,6 +8,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { ProductComponent } from './components/product/product.component';
 import { UserComponent } from './components/user/user.component';
+import { PrimengModule } from './primeng/primeng.module';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { UserComponent } from './components/user/user.component';
     AppRoutingModule,
     GraphQLModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    PrimengModule
   ],
   providers: [],
   bootstrap: [AppComponent]
