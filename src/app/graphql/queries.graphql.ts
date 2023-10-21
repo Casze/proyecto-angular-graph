@@ -28,12 +28,39 @@ const query_GetAllUser = gql`
 
 const mutation_Register = gql`
   mutation Register($name: String!, $password: String!) {
-    register(input: { name: $name, password: $password }) {
-      name
-      password
+    register(
+      input: { name: $name, password: $password }) {
+        name
+        password
+      }
     }
-  }
+  `
+;
+
+const mutation_CreateProduct = gql`
+  mutation CreateProduct($name: String!, $category: String!, $price: Float!, $image: String!, $username: String!, $description: String!){
+      createProduct( 
+        productsInput: {name: $name, category: $category, price: $price, image: $image, username: $username, description: $description}) {
+        id
+        name 
+        price
+        image
+      }    
+    }
+  `
+;
+
+/*
+mutation CreateProduct($Input: CreateProductInput!) {
+  createProduct(productsInput: $Input){
+    id
+    name 
+    price
+  }    
+}
 `;
+*/
+
 /*
 const query_ProductsByUser = gql`
   query ProductsByUser($name: String!) {
@@ -52,28 +79,11 @@ const query_ProductsByUser = gql`
   }
 `;
 */
-const mutation_CreateProduct = gql`
-  mutation CreateProduct($productsInput: CreateProductInput!) {
-    createProduct(productsInput: $productsInput) {
-      id
-      name
-      category
-      price
-      description
-      image
-      username
-      user {
-        id
-        name
-        email
-      }
-    }
-  }
-`;
+
 /*
 const mutation_UpdateProduct = gql`
   mutation UpdateProduct($id: Int!, $updateProductInput: UpdateProductInput!) {
-    updateProduct(id: $id, updateProductInput: $updateProductInput) {
+    updateProduct(id: $id, updateProductInput: $updateProducstInput) {
       id
       name
       category
@@ -95,13 +105,15 @@ const mutation_DeleteProduct = gql`
   }
 `;
 */
+
+
 export {
     query_GetAllProducts, // Listo
     query_GetAllUser,  // Listo
     //query_ProductsByUser,
 
     mutation_Register, // Listo
-    //mutation_CreateProduct,
+    mutation_CreateProduct, // Listo
     //mutation_UpdateProduct,
     //mutation_DeleteProduct
     }
