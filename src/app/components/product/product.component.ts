@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Apollo } from 'apollo-angular';
+import { Apollo, QueryRef } from 'apollo-angular';
 import { Subscription } from 'rxjs';
 import { query_GetAllProducts, query_GetAllUser } from 'src/app/graphql/queries.graphql';
 
@@ -18,6 +18,7 @@ export class ProductComponent implements OnInit, OnDestroy {
 
   private querySubscription: Subscription;
   private querySubscriptionUsers: Subscription;
+  ProductsQuery: QueryRef<any>;
 
   constructor(private apollo: Apollo) {}
 
@@ -27,15 +28,23 @@ export class ProductComponent implements OnInit, OnDestroy {
   }
 
   loadProducts(): void {
-    this.querySubscription = this.apollo
-      .watchQuery<any>({
-        query: query_GetAllProducts,
-      })
+
+    this.ProductsQuery = this.apollo
+    .watchQuery<any>({
+      query: query_GetAllProducts,
+    })
+
+    this.querySubscription = this.ProductsQuery
       .valueChanges.subscribe(({ data, loading }) => {
         this.loading = loading;
         console.log(data.products);       
         this.getAllProducts = data.products;
+        this.refresh();
       });
+  }
+
+  refresh():void{
+    this.ProductsQuery.refetch();
   }
 
   loadUsers(): void {

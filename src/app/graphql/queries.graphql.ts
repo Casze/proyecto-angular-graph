@@ -51,7 +51,7 @@ const query_ProductsByUser = gql`
     }
   }
 `;
-
+*/
 const mutation_CreateProduct = gql`
   mutation CreateProduct($productsInput: CreateProductInput!) {
     createProduct(productsInput: $productsInput) {
@@ -70,7 +70,7 @@ const mutation_CreateProduct = gql`
     }
   }
 `;
-
+/*
 const mutation_UpdateProduct = gql`
   mutation UpdateProduct($id: Int!, $updateProductInput: UpdateProductInput!) {
     updateProduct(id: $id, updateProductInput: $updateProductInput) {

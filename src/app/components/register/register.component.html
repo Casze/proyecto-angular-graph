@@ -10,32 +10,48 @@
               </div>
               <div class="col-md-6 col-lg-7 d-flex align-items-center">
                 <div class="card-body p-4 p-lg-5 text-black">
-  
-                  <form>
-  
+
+                  <!-- form Registro -->
+                  <form novalidate #f="ngForm" (ngSubmit)="OnRegister()">
                     <div class="d-flex align-items-center mb-3 pb-1">
                       <i class="fas fa-cubes fa-2x me-3" style="color: #ff6219;"></i>
                       <span class="h1 fw-bold mb-0">Registro</span>
                     </div>
-  
+                  
                     <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;"></h5>
-  
+                    <!-- Username -->
                     <div class="form-outline mb-4">
-                      <input type="email" id="form2Example17" class="form-control form-control-lg" />
-                      <label class="form-label" for="form2Example17">Name</label>
+                      <input 
+                        type="text"
+                        class="form-control form-control-lg" 
+                        id="userName"
+                        name="userName"
+                        placeholder="User name..."
+                        [(ngModel)]="userName"
+                        required
+                      >
+                      <div *ngIf="usernameError" class="text-danger">El campo de usuario solo puede contener letras y números.</div>
                     </div>
-  
+                    <!-- Username -->
                     <div class="form-outline mb-4">
-                      <input type="password" id="form2Example27" class="form-control form-control-lg" />
-                      <label class="form-label" for="form2Example27">Password</label>
+                      <input 
+                        type="password" 
+                        class="form-control form-control-lg" 
+                        id="userPassword" 
+                        name="userPassword" 
+                        placeholder="Password"
+                        [(ngModel)]="userPassword"
+                        required
+                      >
+                      <div *ngIf="passwordError" class="text-danger">El campo de contraseña solo puede contener letras y números.</div>
                     </div>
-  
+                    <!-- Boton  -->
                     <div class="pt-1 mb-4">
-                      <button class="btn btn-dark btn-lg btn-block" type="button">Register</button>
+                      <button type="submit" class="btn btn-dark btn-lg btn-block" [disabled]="!f.valid">
+                        Register
+                      </button>
                     </div>
-
-                  </form>
-  
+                  </form>                   
                 </div>
               </div>
             </div>
