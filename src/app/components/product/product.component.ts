@@ -19,6 +19,7 @@ export class ProductComponent implements OnInit, OnDestroy {
   private querySubscription: Subscription;
   private querySubscriptionUsers: Subscription;
   ProductsQuery: QueryRef<any>;
+  static getAllProducts: any;
 
   constructor(private apollo: Apollo) {}
 

@@ -11,7 +11,8 @@ const query_GetAllProducts = gql`
         category,
         price,
         description,
-        image
+        image,
+        username
         }
     }
 `;
@@ -50,17 +51,58 @@ const mutation_CreateProduct = gql`
   `
 ;
 
+const mutation_DeleteProduct = gql`
+  mutation DeleteProduct($id: Int!) {
+    deleteProduct(id: $id)
+  }
+`;
+
+const mutation_UpdateProduct = gql`
+  mutation UpdateProduct($id: Int!, $updateProductInput: UpdateProductInput!) {
+    updateProduct( id: $id, updateProductInput: {
+        name: $name 
+        category: $category 
+        price: $price 
+        image: $image 
+        username: $username 
+        description: $description
+        id: $id
+      }) {
+      id
+      name
+    }
+  }
+`;
+
+const mutation_UpdateProduct2 = gql`
+  mutation UpdateProduct($id: Int!, $updateProductInput: UpdateProductInput!) {
+    updateProduct(id: $id, updateProductInput: $updateProductInput) {
+      id
+      name
+    }
+  }
+`;
+
+
+
 /*
-mutation CreateProduct($Input: CreateProductInput!) {
-  createProduct(productsInput: $Input){
-    id
-    name 
-    price
-  }    
-}
+const mutation_UpdateProduct = gql`
+  mutation UpdateProduct($id: Int!, $updateProductInput: {UpdateProductInput!}) {
+    updateProduct( id: $id, updateProductInput: {
+        name: $name 
+        category: $category 
+        price: $price 
+        image: $image 
+        username: $username 
+        description: $description
+        id: $id
+      }) {
+      id
+      name
+    }
+  }
 `;
 */
-
 /*
 const query_ProductsByUser = gql`
   query ProductsByUser($name: String!) {
@@ -114,6 +156,7 @@ export {
 
     mutation_Register, // Listo
     mutation_CreateProduct, // Listo
-    //mutation_UpdateProduct,
-    //mutation_DeleteProduct
+    mutation_UpdateProduct, // hay un error no se cual
+    mutation_UpdateProduct2, // hay un error no se cual
+    mutation_DeleteProduct // Listo
     }
