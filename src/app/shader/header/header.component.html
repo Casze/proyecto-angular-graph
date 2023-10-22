@@ -18,18 +18,18 @@
       <!-- Collapsible wrapper -->
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <!-- Navbar brand -->
-          <a class="navbar-brand mt-2 mt-lg-0" href="/">
+          <a class="navbar-brand mt-2 mt-lg-0" href="#">
               <h4 class="pt-1 mb-1">UCN Digital</h4>
           </a>
           <!-- Left links -->
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item">
-                  <a class="nav-link active" href="/">Home</a>
+                  <a class="nav-link active" href="#">Home</a>
               </li>
               <li class="nav-item">
-                  <a class="nav-link" href="/cart">Carrito</a>
-              </li><!-- abajo *ngIf="!userLoginOn" va sin !>-->
-              <li class="nav-item" *ngIf="!userLoginOn">
+                  <a class="nav-link" href="#">Categories</a>
+              </li>
+              <li class="nav-item" *ngIf="userLoginOn">
                   <a class="nav-link" routerLink="/admin">Admin</a>
               </li>
           </ul>
@@ -45,14 +45,14 @@
           
         <li class="nav-item" *ngIf="!userLoginOn">
             <a class="nav-link active" routerLink="/register">Sign up</a>
-        </li><!-- abajo *ngIf="!userLoginOn" va sin !>-->
-        <li class="nav-item" *ngIf="!userLoginOn">
+        </li>
+        <li class="nav-item" *ngIf="userLoginOn">
             <a class="nav-link active"  aria-current="page">Name User</a>
         </li>
         <li class="nav-item" *ngIf="!userLoginOn">
             <a class="nav-link active" aria-current="page" href="/iniciar-sesion">Sign in</a>
-        </li><!-- abajo *ngIf="!userLoginOn" va sin !>-->
-        <li class="nav-item" *ngIf="!userLoginOn">
+        </li>
+        <li class="nav-item" *ngIf="userLoginOn">
             <a class="nav-link active" aria-current="page" href="/">Sing out</a>
         </li>
           
