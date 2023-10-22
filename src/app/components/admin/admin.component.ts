@@ -62,7 +62,7 @@ export class AdminComponent {
 
   ngOnInit():void{
     this.loadProductAdmin();
-    this.UpdateProductSimple();
+    //this.UpdateProductSimple();
   }
 
   //===============================================================================
@@ -91,22 +91,22 @@ export class AdminComponent {
   // Crear Producto
   UpdateProduct():void{
     this.apolloUpdate.mutate({
-      mutation: mutation_UpdateProduct,
+      mutation: mutation_UpdateProduct2,
       variables:{
         id: parseInt(this.Update_id),
         updateProductInput: {
           name: this.Update_name,
           category: this.Update_category,
           price: parseFloat(this.Update_price),
-          image: this.Update_image,
-          username: this.Update_username,
+          image: "https://www.ucn.cl/wp-content/uploads/2018/05/Escudo-UCN-Full-Color.png",
+          username: this.Update_name,
           description: this.Update_description,
-          id: parseInt(this.Update_id),
+          id: parseInt(this.Update_id)
         }
       },   
     }).subscribe(() => {
       this.router.navigate(['/']);
-    }), err => {
+    }), (err: any) => {
       alert(err);
     };
   }

@@ -1,0 +1,289 @@
+<section class="vh-75" style="background-color: #9A616D;">
+    <!-- Contenedor Crate Product -->
+    <div class="container py-5 h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col col-xl-10">
+        <!-- ============================================================================================================= --> 
+        <!-- --- CREATE -- --> 
+        <!-- ============================================================================================================= --> 
+        <!-- (CREATE) Card Create Product -->  
+          <div class="card" style="border-radius: 1rem;">
+            <div class="row g-0">
+              <div class="col-md-6 col-lg-5 d-none d-md-block">
+                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/img1.webp"
+                  alt="login form" class="img-fluid" style="border-radius: 1rem 0 0 1rem;" />
+              </div>
+              <div class="col-md-6 col-lg-7 d-flex align-items-center">
+                <div class="card-body p-4 p-lg-5 text-black">
+
+                  <!-- (CREATE) form Create Producto -->
+                  <form novalidate #f="ngForm" (ngSubmit)="CreateProduct()">
+                    <div class="d-flex align-items-center mb-3 pb-1">
+                      <i class="fas fa-cubes fa-2x me-3" style="color: #ff6219;"></i>
+                      <span class="h1 fw-bold mb-0">Create Product</span>
+                    </div>
+                  
+                    <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;"></h5>
+                    <!-- (CREATE) Name Product -->
+                    <div class="form-outline mb-4">
+                      <input 
+                        type="text"
+                        class="form-control form-control-lg" 
+                        id="Create_name" 
+                        name="Create_name"
+                        placeholder="Create_name..."
+                        [(ngModel)]="Create_name"
+                        required>
+                    </div>
+                    <!-- (CREATE) Category Product -->
+                    <div class="form-outline mb-4">
+                        <input 
+                          type="text"
+                          class="form-control form-control-lg" 
+                          id="Create_category" 
+                          name="Create_category"
+                          placeholder="Create_category..."
+                          [(ngModel)]="Create_category"
+                          required>
+                    </div>
+                    <!-- (CREATE) Price Product -->
+                    <div class="form-outline mb-4">
+                      <input 
+                        type="text"
+                        class="form-control form-control-lg" 
+                        id="Create_price" 
+                        name="Create_price"
+                        placeholder="Create_price..."
+                        [(ngModel)]="Create_price"
+                        required
+                        pattern="^\d+(\.\d+)?$" 
+                      >
+                    </div>
+                    <!-- (CREATE) Image Product -->
+                    <div class="form-outline mb-4">
+                        <input 
+                          type="text"
+                          class="form-control form-control-lg" 
+                          id="Create_image" 
+                          name="https://www.ucn.cl/wp-content/uploads/2018/05/Escudo-UCN-Full-Color.png"
+                          placeholder="Create_image..."
+                          [(ngModel)]="Create_image"
+                          required>
+                    </div>
+                    
+                    <!-- (CREATE) UserName Product -->
+                    <div class="form-outline mb-4">
+                        <input 
+                          type="text"
+                          class="form-control form-control-lg" 
+                          id="Create_username" 
+                          name="Create_username"
+                          placeholder="Create_username..."
+                          [(ngModel)]="Create_username"
+                          required>
+                    </div>
+                    <!-- (CREATE) Descrition Product -->
+                    <div class="form-outline mb-4">
+                        <input 
+                          type="text"
+                          class="form-control form-control-lg" 
+                          id="Create_description" 
+                          name="Create_description"
+                          placeholder="Create_description..."
+                          [(ngModel)]="Create_description"
+                          required>
+                    </div>
+                    <!-- (CREATE) Boton  -->
+                    <div class="pt-1 mb-4">
+                      <button type="submit" class="btn btn-dark btn-lg btn-block" [disabled]="!f.valid">
+                        Register
+                      </button>
+                    </div>
+                    <!-- (CREATE) FIN Boton  -->
+                  </form>
+                  <!-- (CREATE) FIN forms  -->                   
+                </div>
+              </div>   
+            </div>
+          </div>
+          <!-- (CREATE) FIN Card Crate Product  -->
+        </div>
+      </div>
+    </div>
+    <!-- FIN Cntenedor Crate PRoduct -->
+
+    <!-- ============================================================================================================= --> 
+    <!-- --- Delete --- --> 
+    <!-- ============================================================================================================= --> 
+    <!-- Contenedor Crate Product -->
+    <div class="container py-5 h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col col-xl-10">
+          <!-- (Delete) Card Create Product -->  
+          <div class="card" style="border-radius: 1rem;">
+            <div class="row g-0">
+              <div class="col-md-6 col-lg-5 d-none d-md-block">
+                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/img1.webp"
+                  alt="login form" class="img-fluid" style="border-radius: 1rem 0 0 1rem;" />
+              </div>
+              <div class="col-md-6 col-lg-7 d-flex align-items-center">
+                <div class="card-body p-4 p-lg-5 text-black">
+                  <!-- (Delete) Titulo -->
+                  <div class="d-flex align-items-center mb-3 pb-1">
+                    <i class="fas fa-cubes fa-2x me-3" style="color: #ff6219;"></i>
+                    <span class="h1 fw-bold mb-0">Delete Product</span>
+                  </div> 
+                  <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;"></h5>  
+                  <!-- (Delete) ID Product -->
+                  <div class="input-group mb-4">
+                      <select 
+                          class="form-select" 
+                          aria-label="Example select with button addon" 
+                          id="inputGroupSelect04"
+                          (change)="DeleteSelectedProduct($event)" required>
+                          <option [value]="" disabled selected>ID - Product</option>
+                          <option *ngFor="let product of AllProductsAdmin" [value]="product.id">{{product.id}} - {{product.name}}</option>
+                      </select>
+                      <button type="button" class="btn btn-dark btn-lg btn-block" [disabled]="!isButtonEnabledD" (click)="deleteProduct()">
+                      Delete
+                    </button>
+                  </div>
+                  <!-- (Delete) Boton  -->
+                  <div class="pt-1 mb-4">
+                    
+                  </div>                 
+                </div>
+              </div>   
+            </div>
+          </div>
+          <!-- (CREATE) FIN Card Crate Product  -->
+        </div>
+      </div>
+    </div>
+    <!-- FIN Cntenedor Crate PRoduct -->
+    
+    <!-- ============================================================================================================= --> 
+    <!-- --- UPDATE --- --> 
+    <!-- ============================================================================================================= --> 
+
+    <!-- (UPDATE) Contenedor UPDATE Product-->
+    <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+          <div class="col col-xl-10">
+            <!-- (UPDATE) Card UPDATE Product-->  
+            <div class="card" style="border-radius: 1rem;">
+              <div class="row g-0">
+                <div class="col-md-6 col-lg-5 d-none d-md-block">
+                  <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/img1.webp"
+                    alt="login form" class="img-fluid" style="border-radius: 1rem 0 0 1rem;" />
+                </div>
+                <div class="col-md-6 col-lg-7 d-flex align-items-center">
+                  <div class="card-body p-4 p-lg-5 text-black">
+  
+                    <!-- (UPDATE) Titulo -->
+                    <div class="d-flex align-items-center mb-3 pb-1">
+                        <i class="fas fa-cubes fa-2x me-3" style="color: #ff6219;"></i>
+                        <span class="h1 fw-bold mb-0">Update Product</span>
+                    </div> 
+                    <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;"></h5>  
+                    <!-- (UPDATE) ID Product -->
+                    <div class="input-group mb-4">
+                        <select 
+                            class="form-select" 
+                            aria-label="Example select with button addon" 
+                            id="inputGroupSelect04"
+                            (change)="updateSelectedProduct($event)">
+                            <option [value]="" disabled selected>ID - Product</option>
+                            <option *ngFor="let product of AllProductsAdmin" [value]="product.id">{{product.id}} - {{product.name}}</option>
+                        </select>
+                    </div>
+
+                    <!-- (UPDATE) form UPDATE Product -->
+                    <form novalidate #f="ngForm" (ngSubmit)="UpdateProduct()">     
+                      <!-- (UPDATE) ID Product -->
+                      
+                      <!-- (UPDATE) Name Product -->
+                      <div class="form-outline mb-4">
+                        <input 
+                          type="text"
+                          class="form-control form-control-lg" 
+                          id="Update_name" 
+                          name="Update_name"
+                          placeholder="Update_name..."
+                          [(ngModel)]="Update_name"
+                          >
+                      </div>
+                      <!-- (UPDATE) Category Product -->
+                      <div class="form-outline mb-4">
+                          <input 
+                            type="text"
+                            class="form-control form-control-lg" 
+                            id="Update_category" 
+                            name="Update_category"
+                            placeholder="Update_category..."
+                            [(ngModel)]="Update_category"
+                            >
+                      </div>
+                      <!-- (UPDATE) Price Product -->
+                      <div class="form-outline mb-4">
+                          <input 
+                            type="text"
+                            class="form-control form-control-lg" 
+                            id="Update_price" 
+                            name="Update_price"
+                            placeholder="Update_price..."
+                            [(ngModel)]="Update_price"
+                            >
+                      </div>
+                      <!-- (UPDATE) Image Product -->
+                      <div class="form-outline mb-4">
+                          <input 
+                            type="text"
+                            class="form-control form-control-lg" 
+                            id="Update_image" 
+                            name="Update_image"
+                            placeholder="Update_image..."
+                            [(ngModel)]="Update_image"
+                            >
+                      </div>
+                      <!-- (UPDATE) UserName Product -->
+                      <div class="form-outline mb-4">
+                          <input 
+                            type="text"
+                            class="form-control form-control-lg" 
+                            id="Update_username" 
+                            name="Update_username"
+                            placeholder="Update_username..."
+                            [(ngModel)]="Update_username"
+                            >
+                      </div>
+                      <!-- (UPDATE) Descrition Product -->
+                      <div class="form-outline mb-4">
+                          <input 
+                            type="text"
+                            class="form-control form-control-lg" 
+                            id="Update_description" 
+                            name="Update_description"
+                            placeholder="Update_description..."
+                            [(ngModel)]="Update_description"
+                            >
+                      </div>
+                      <!-- (UPDATE) Boton  -->
+                      <div class="pt-1 mb-4">
+                        <button type="submit" class="btn btn-dark btn-lg btn-block" [disabled]="!isButtonEnabled">
+                            Register
+                        </button>
+                      </div>
+                      <!-- (UPDATE) FIN Boton  -->
+                    </form>
+                    <!-- (UPDATE) FIN forms  -->                   
+                  </div>
+                </div>   
+              </div>
+            </div>
+            <!-- (UPDATE) FIN Card -->
+          </div>
+        </div>
+      </div>
+      <!-- FIN Cntenedor  -->    
+</section>
