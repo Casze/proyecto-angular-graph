@@ -4,7 +4,7 @@ import { ActivatedRoute, Route, Router } from '@angular/router';
 import { Apollo, QueryRef } from 'apollo-angular';
 import { Subscription } from 'rxjs';
 import { mutation_CreateProduct, mutation_DeleteProduct, mutation_Register, mutation_UpdateProduct, mutation_UpdateProduct2 } from 'src/app/graphql/queries.graphql';
-import { ProductComponent } from '../product/product.component';
+import { ProductComponent } from '../../components/product/product.component';
 import { query_GetAllProducts, query_GetAllUser } from 'src/app/graphql/queries.graphql';
 
 @Component({
