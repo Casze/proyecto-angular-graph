@@ -83,6 +83,18 @@ const mutation_UpdateProduct2 = gql`
   }
 `;
 
+const LOGIN_MUTATION = gql`
+      mutation Login($email: String!, $password: String!) {
+        login(email: $email, password: $password) {
+          token
+          user {
+            id
+            email
+          }
+        }
+      }
+    `
+
 
 
 /*
@@ -156,7 +168,8 @@ export {
 
     mutation_Register, // Listo
     mutation_CreateProduct, // Listo
-    mutation_UpdateProduct, // hay un error no se cual
+    mutation_UpdateProduct, // hay un error no se cual casi arreglado funciona
     mutation_UpdateProduct2, // hay un error no se cual
-    mutation_DeleteProduct // Listo
+    mutation_DeleteProduct, // Listo
+    LOGIN_MUTATION
     }
