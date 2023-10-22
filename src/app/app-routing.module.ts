@@ -4,6 +4,7 @@ import { ProductComponent } from './components/product/product.component';
 import { RegisterComponent } from './page/register/register.component';
 import { AdminComponent } from './page/admin/admin.component';
 import { LoginComponent } from './page/login/login.component';
+import { CartComponent } from './page/cart/cart.component';
 
 const routes: Routes = [
   { path: '', redirectTo:'/inicio',pathMatch:'full'},
@@ -11,6 +12,7 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent},
   { path: 'admin', component: AdminComponent},
   { path: 'iniciar-sesion', component: LoginComponent},
+  { path: 'carrito', component: CartComponent},
   { path: '**',redirectTo:'',pathMatch:'full'}
 
 ];

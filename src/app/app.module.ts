@@ -14,6 +14,7 @@ import { LoginComponent } from './page/login/login.component';
 import { HeaderComponent } from './shader/header/header.component';
 import { RegisterComponent } from './page/register/register.component';
 import { AdminComponent } from './page/admin/admin.component';
+import { CartComponent } from './page/cart/cart.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { AdminComponent } from './page/admin/admin.component';
     LoginComponent,
     HeaderComponent,
     RegisterComponent,
-    AdminComponent
+    AdminComponent,
+    CartComponent
   ],
   imports: [
     BrowserModule,
