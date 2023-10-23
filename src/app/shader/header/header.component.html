@@ -30,7 +30,7 @@
                   <a class="nav-link" href="#">Categories</a>
               </li>
               <!-- userLoginOn -->
-              <li class="nav-item" *ngIf="!userLoginOn">
+              <li class="nav-item" *ngIf="userLoginOn">
                   <a class="nav-link" routerLink="/admin">Admin</a>
               </li>
           </ul>
@@ -48,7 +48,7 @@
             <a class="nav-link active" routerLink="/register">Sign up</a>
         </li>
         <!-- userLoginOn -->
-        <li class="nav-item" *ngIf="!userLoginOn">
+        <li class="nav-item" *ngIf="userLoginOn">
             <a class="nav-link active"  aria-current="page">Name User</a>
         </li>
         <!-- !userLoginOn -->
@@ -56,7 +56,7 @@
             <a class="nav-link active" aria-current="page" href="/iniciar-sesion">Sign in</a>
         </li>
         <!-- userLoginOn -->
-        <li class="nav-item" *ngIf="!userLoginOn">
+        <li class="nav-item" *ngIf="userLoginOn">
             <a class="nav-link active" aria-current="page" href="/">Sing out</a>
         </li>
           

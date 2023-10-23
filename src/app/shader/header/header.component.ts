@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { LoginService } from 'src/app/services/auth/login.service';
 
 @Component({
   selector: 'app-header',
@@ -10,11 +11,19 @@ export class HeaderComponent implements OnInit {
   userLoginOn:Boolean =false;
 
   constructor(
+
+    private loginService : LoginService,
     
   ){}
 
   ngOnInit(): void {
-    
+    this.loginService.currentUserLoginOn.subscribe(
+      {
+        next:(userLoginOn) => {
+          this.userLoginOn=userLoginOn;
+        }
+      }
+    );
   }
   
 }
