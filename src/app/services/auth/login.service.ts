@@ -30,7 +30,7 @@ export class LoginService {
       },
     }).pipe(      
         map(result => { 
-        console.log("Resltado de", result.data);
+        console.log("Resltado de", result);
         console.log("*/*/*?",result.data);
         return result.data as User;        
       }),
@@ -38,7 +38,9 @@ export class LoginService {
         this.currentUserData.next(userData);
         this.currentUserLoginOn.next(true);
         this.currentUserName.next(credentials.name);
-        console.log("Hace esto?",credentials.name);
+        console.log("Hace userData?",userData);
+        console.log("Hace currentUserData?",this.currentUserData);
+        console.log("Hace currentUserData.value.id?",this.currentUserData.value);
       })
     );
   }
