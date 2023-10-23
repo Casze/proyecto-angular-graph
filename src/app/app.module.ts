@@ -14,6 +14,7 @@ import { LoginComponent } from './page/login/login.component';
 import { HeaderComponent } from './shader/header/header.component';
 import { RegisterComponent } from './page/register/register.component';
 import { AdminComponent } from './page/admin/admin.component';
+import { Apollo, ApolloModule } from 'apollo-angular';
 
 @NgModule({
   declarations: [
@@ -34,8 +35,9 @@ import { AdminComponent } from './page/admin/admin.component';
     FormsModule,
     PrimengModule,
     ReactiveFormsModule,
+    ApolloModule,
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [Apollo],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

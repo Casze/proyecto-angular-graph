@@ -1,6 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ProductComponent } from './product.component';
+import { Apollo, ApolloModule } from 'apollo-angular';
+import { AppModule } from 'src/app/app.module';
+import { ApolloTestingModule } from 'apollo-angular/testing';
 
 describe('ProductComponent', () => {
   let component: ProductComponent;
@@ -8,7 +11,9 @@ describe('ProductComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [ProductComponent]
+      declarations: [ProductComponent],
+      providers: [Apollo],
+      imports: [ApolloTestingModule],
     });
     fixture = TestBed.createComponent(ProductComponent);
     component = fixture.componentInstance;
