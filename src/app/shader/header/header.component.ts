@@ -14,6 +14,8 @@ export class HeaderComponent implements OnInit {
   userLoginOn: Boolean;
   userData?: User;
   userName:String;
+  ID:number;
+
   private subscription: Subscription;
 
   constructor(
@@ -27,12 +29,13 @@ export class HeaderComponent implements OnInit {
       next:(userLoginOn) => {this.userLoginOn=userLoginOn;}
     });
     this.loginService.currentUserData.subscribe({
-        next:(userData) => {this.userData=userData;}
+        next:(id) => {this.ID=id;}
     });
     // Suscripción para userName
     const sub3 = this.loginService.userNameLoginON.subscribe(userName => {
       this.userName = userName;
     });
+
   }
 
   ngOnDestroy(): void {

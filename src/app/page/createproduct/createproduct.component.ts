@@ -19,7 +19,7 @@ export class CreateproductComponent implements OnInit, OnDestroy {
   successMessage: string = '';
   
   userLoginOn: Boolean;
-  userData?: User;
+  userData?: number;
   userName: String;
   loading: boolean = false;
   
@@ -48,8 +48,8 @@ export class CreateproductComponent implements OnInit, OnDestroy {
     // Suscripción para userName
     const sub3 = this.loginService.userNameLoginON.subscribe(userName => {
       this.Create_username = userName;
-      console.log(this.Create_username)
-    });
+      //console.log(this.Create_username)
+    });    
   }
 
   CreateProduct(): void {

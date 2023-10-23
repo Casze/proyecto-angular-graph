@@ -16,6 +16,7 @@ import { AdminComponent } from './page/admin/admin.component';
 import { CreateproductComponent } from './page/createproduct/createproduct.component';
 import { UpdateproductComponent } from './page/updateproduct/updateproduct.component';
 import { DeleteproductComponent } from './page/deleteproduct/deleteproduct.component';
+import { CartComponent } from './page/cart/cart.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { DeleteproductComponent } from './page/deleteproduct/deleteproduct.compo
     CreateproductComponent,
     UpdateproductComponent,
     DeleteproductComponent,
+    CartComponent,
   ],
   imports: [
     BrowserModule,
