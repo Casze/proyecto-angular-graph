@@ -81,6 +81,7 @@ export class UpdateproductComponent implements OnInit, OnDestroy {
         }
       },   
     }).subscribe(() => {
+      this.refresh();
       this.router.navigate(['/update']);
     }), (err: any) => {
       alert(err);
@@ -123,6 +124,16 @@ export class UpdateproductComponent implements OnInit, OnDestroy {
     } else {
       // Manejar el caso en que no se encuentre el producto
     }  
+  }
+
+  refresh(){
+    this.Update_idP="";
+    this.Update_id="";
+    this.Update_name="";
+    this.Update_category="";
+    this.Update_price="";
+    this.Update_image="https://www.ucn.cl/wp-content/uploads/2018/05/Escudo-UCN-Full-Color.png";    
+    this.Update_description="";
   }
   
 

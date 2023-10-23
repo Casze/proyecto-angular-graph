@@ -20,13 +20,14 @@ export class CreateproductComponent implements OnInit, OnDestroy {
   
   userLoginOn: Boolean;
   userData?: User;
+  userName: String;
   loading: boolean = false;
   
   Create_name: string = '';
   Create_category: string = '';
   Create_price: string = '';
   Create_image: string = '';
-  Create_username: string = '';
+  Create_username: String = '';
   Create_description: string = '';
   
   private querySubscription?: Subscription;
@@ -43,6 +44,11 @@ export class CreateproductComponent implements OnInit, OnDestroy {
     });
     this.loginService.currentUserData.subscribe({
         next:(userData) => {this.userData=userData;}
+    });
+    // Suscripción para userName
+    const sub3 = this.loginService.userNameLoginON.subscribe(userName => {
+      this.Create_username = userName;
+      console.log(this.Create_username)
     });
   }
 
@@ -65,6 +71,11 @@ export class CreateproductComponent implements OnInit, OnDestroy {
       () => {
         this.successMessage = 'Producto creado con éxito.';
         this.errorMessage = ''; // Limpiar cualquier mensaje de error anterior
+        this.Create_name = '';
+        this.Create_category = '';
+        this.Create_price = '';
+        this.Create_image = '';
+        this.Create_description = '';
         this.router.navigate(['/create']);
       },
       (error: { message: string; }) => {

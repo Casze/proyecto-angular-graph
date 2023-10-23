@@ -86,12 +86,11 @@
                           name="Create_username"
                           placeholder="Create_username..."
                           [(ngModel)]="Create_username"
-                          required>
+                          required readonly>
                     </div>
                     <div *ngIf="errorMessage" class="alert alert-danger" role="alert">
                       {{ errorMessage }}
                     </div>
-
                     <!-- (CREATE) Description Product -->
                     <div class="form-outline mb-4">
                         <input 
