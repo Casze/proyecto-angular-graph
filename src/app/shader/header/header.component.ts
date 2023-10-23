@@ -8,7 +8,7 @@ import { LoginService } from 'src/app/services/auth/login.service';
 })
 export class HeaderComponent implements OnInit {
 
-  userLoginOn:Boolean =false;
+  userLoginOn:Boolean;
 
   constructor(
 

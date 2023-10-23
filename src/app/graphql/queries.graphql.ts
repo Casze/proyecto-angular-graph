@@ -83,6 +83,18 @@ const mutation_CreateProduct = gql`
   `
 ;
 
+const MUTATION_CreateProduct = gql`
+  mutation CreateProduct($productsInput: CreateProductInput!){
+      createProduct( productsInput: {name: $name, category: $category, price: $price, image: $image, username: $username, description: $description}) {
+        id
+        name 
+        price
+        image
+      }    
+    }
+  `
+;
+
 const mutation_DeleteProduct = gql`
   mutation DeleteProduct($id: Int!) {
     deleteProduct(id: $id)
@@ -188,6 +200,7 @@ export {
     LOGIN_MUTATION,
     //query_ProductsByUser,
 
+    MUTATION_CreateProduct,
     mutation_Register, // Listo
     mutation_CreateProduct, // Listo
     mutation_UpdateProduct, // hay un error no se cual

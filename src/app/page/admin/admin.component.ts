@@ -6,6 +6,8 @@ import { Subscription } from 'rxjs';
 import { mutation_CreateProduct, mutation_DeleteProduct, mutation_Register, mutation_UpdateProduct, mutation_UpdateProduct2 } from 'src/app/graphql/queries.graphql';
 import { ProductComponent } from '../../components/product/product.component';
 import { query_GetAllProducts, query_GetAllUser } from 'src/app/graphql/queries.graphql';
+import { User } from 'src/app/services/auth/user';
+import { LoginService } from 'src/app/services/auth/login.service';
 
 @Component({
   selector: 'app-admin',
@@ -14,11 +16,14 @@ import { query_GetAllProducts, query_GetAllUser } from 'src/app/graphql/queries.
 })
 export class AdminComponent {
 
+  userLoginOn:Boolean;
+  userData?:User;
+
   loading: boolean;
   // Create  
   Create_name:'';
   Create_category:'';
-  Create_price:'';
+  Create_price:''; // Float
   Create_image: '';
   Create_username:'';
   Create_description:'';
@@ -51,6 +56,7 @@ export class AdminComponent {
     private apolloCrate: Apollo,
     
     private ActivatedRoute: ActivatedRoute,
+    private loginService : LoginService,    
 
     private apolloUpdate: Apollo,
     private apolloDelete: Apollo,
@@ -63,6 +69,21 @@ export class AdminComponent {
   ngOnInit():void{
     this.loadProductAdmin();
     //this.UpdateProductSimple();
+
+    //Obtengo los datos y estado del usuario
+    this.loginService.currentUserLoginOn.subscribe(
+      {
+        next:(userLoginOn) => {
+          this.userLoginOn=userLoginOn;
+        }
+    });
+    this.loginService.currentUserData.subscribe(
+      {
+        next:(userData) => {
+          this.userData=userData;
+        }
+    });
+    console.log("Estado", this.userLoginOn);
   }
 
   //===============================================================================
@@ -81,7 +102,7 @@ export class AdminComponent {
         description: this.Create_description
       },
     }).subscribe(() => {
-      this.router.navigate(['/']);
+      this.router.navigate(['/admin']);
     }), err => {
       alert(err);
     };
@@ -139,7 +160,7 @@ export class AdminComponent {
         }
       },   
     }).subscribe(() => {
-      this.router.navigate(['/']);
+      this.router.navigate(['/admin']);
     }), (err: any) => {
       alert(err);
     };
@@ -203,7 +224,7 @@ export class AdminComponent {
         id: parseInt(this.Delete_id)
         }
     }).subscribe(() => {
-      this.router.navigate(['/']);
+      this.router.navigate(['/admin']);
     }), err => {
       alert(err);
     };

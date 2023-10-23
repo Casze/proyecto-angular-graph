@@ -10,10 +10,9 @@ import { User } from 'src/app/services/auth/user';
   templateUrl: './product.component.html',
   styleUrls: ['./product.component.css']
 })
-export class ProductComponent implements OnInit, OnDestroy {
+export class ProductComponent implements OnInit {
 
-  userLoginOn:Boolean =false;
-
+  userLoginOn:Boolean;
   userData?:User;
 
   loading: boolean;
@@ -36,6 +35,8 @@ export class ProductComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.loadProducts();
     this.loadUsers();
+
+    //Obtengo los datos y estado del usuario
     this.loginService.currentUserLoginOn.subscribe(
       {
         next:(userLoginOn) => {
@@ -48,8 +49,7 @@ export class ProductComponent implements OnInit, OnDestroy {
           this.userData=userData;
         }
     });
-      
-   
+    console.log("Estado", this.userLoginOn);
   }
 
   loadProducts(): void {
@@ -89,9 +89,10 @@ export class ProductComponent implements OnInit, OnDestroy {
       });
   }
 
-  
-
+  /*
   ngOnDestroy(): void {
+    this.querySubscription.unsubscribe();
+    this.querySubscriptionUsers.unsubscribe();
   }
-
+  */
 }

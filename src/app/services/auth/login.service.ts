@@ -16,9 +16,6 @@ export class LoginService {
   currentUserLoginOn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   currentUserData: BehaviorSubject<User> = new BehaviorSubject<User>({id:0});
 
-
-
-
   constructor(private apollo: Apollo) {}
 
   login(credentials: loginRequest): Observable<User> { // Tipo de retorno explícito    
