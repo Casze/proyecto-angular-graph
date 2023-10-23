@@ -26,12 +26,15 @@
               <li class="nav-item">
                   <a class="nav-link active" routerLink="/inicio">Home</a>
               </li>
-              <li class="nav-item">
-                  <a class="nav-link" routerLink="/inicio">Categories</a>
-              </li>
               <!-- userLoginOn -->
-              <li class="nav-item" *ngIf="userLoginOn">
-                  <a class="nav-link" routerLink="/admin">Admin</a>
+              <li class="nav-item" *ngIf="!userLoginOn">
+                  <a class="nav-link" routerLink="/create">Create</a>
+              </li>
+              <li class="nav-item" *ngIf="!userLoginOn">
+                <a class="nav-link" routerLink="/delete">Delete</a>
+              </li>
+              <li class="nav-item" *ngIf="!userLoginOn">
+                <a class="nav-link" routerLink="/update">Update</a>
               </li>
           </ul>
           <!-- Left links -->
@@ -49,15 +52,15 @@
         </li>
         <!-- userLoginOn -->
         <li class="nav-item" *ngIf="userLoginOn">
-            <a class="nav-link active"  aria-current="page">Name User</a>
+            <a class="nav-link active"  aria-current="page">{{userData.id}}</a>
         </li>
         <!-- !userLoginOn -->
         <li class="nav-item" *ngIf="!userLoginOn">
-            <a class="nav-link active" aria-current="page" href="/iniciar-sesion">Sign in</a>
+            <a class="nav-link active" aria-current="page" href="/iniciar-sesion">LogIn</a>
         </li>
         <!-- userLoginOn -->
         <li class="nav-item" *ngIf="userLoginOn">
-            <a class="nav-link active" aria-current="page" href="/">Sing out</a>
+            <a class="nav-link active" aria-current="page" href="/">LogOut</a>
         </li>
           
       </ul>

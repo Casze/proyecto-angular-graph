@@ -34,7 +34,7 @@ export class LoginService {
       tap( (userData: User) =>{
         this.currentUserData.next(userData);
         this.currentUserLoginOn.next(true);   
-        console.log("Hace esto?",this.currentUserLoginOn);
+        console.log("Hace esto?",this.currentUserData);
       })
     );
   }

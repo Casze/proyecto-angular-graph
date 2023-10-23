@@ -8,6 +8,7 @@ import { CreateproductComponent } from './page/createproduct/createproduct.compo
 import { DeleteproductComponent } from './page/deleteproduct/deleteproduct.component';
 import { UpdateproductComponent } from './page/updateproduct/updateproduct.component';
 
+
 const routes: Routes = [
   { path: '', redirectTo:'/delete',pathMatch:'full'},
   { path: 'inicio', component: ProductComponent},
@@ -18,7 +19,6 @@ const routes: Routes = [
   { path: 'delete', component: DeleteproductComponent},
   { path: 'update', component: UpdateproductComponent},
   { path: '**',redirectTo:'',pathMatch:'full'}
-
 ];
 
 @NgModule({
