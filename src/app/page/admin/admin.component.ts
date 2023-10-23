@@ -17,7 +17,7 @@ import { LoginService } from 'src/app/services/auth/login.service';
 export class AdminComponent {
 
   userLoginOn:Boolean;
-  userData?:number;
+  userData?:User;
 
   loading: boolean;
   // Create  

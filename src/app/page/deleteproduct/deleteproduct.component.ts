@@ -17,7 +17,7 @@ export class DeleteproductComponent implements OnInit, OnDestroy {
   successMessage: string = '';
   
   userLoginOn: Boolean;
-  userData?: number;
+  userData?: User;
   loading: boolean = false; 
   
   private querySubscription?: Subscription;

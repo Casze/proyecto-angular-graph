@@ -13,7 +13,7 @@ import { User } from 'src/app/services/auth/user';
 export class ProductComponent implements OnInit {
 
   userLoginOn:Boolean;
-  userData:number;
+  userData?:User;
 
   loading: boolean;
   loading2: boolean;
@@ -37,9 +37,11 @@ export class ProductComponent implements OnInit {
     this.loadUsers();
 
     //Obtengo los datos y estado del usuario
-    this.loginService.currentUserLoginOn.subscribe({
-      next:(userLoginOn) => {
-        this.userLoginOn=userLoginOn;}
+    this.loginService.currentUserLoginOn.subscribe(
+      {
+        next:(userLoginOn) => {
+          this.userLoginOn=userLoginOn;
+        }
     });
     this.loginService.currentUserData.subscribe(
       {
@@ -48,25 +50,24 @@ export class ProductComponent implements OnInit {
         }
     });
     console.log("Estado", this.userLoginOn);
-    console.log("UserID", this.userData);
   }
 
   loadProducts(): void {
-    //console.log("loadProducts")
+    console.log("loadProducts")
     this.ProductsQuery = this.apollo
     .watchQuery<any>({
       query: query_GetAllProducts,
     })
-    //console.log(this.ProductsQuery)
+    console.log(this.ProductsQuery)
     this.querySubscription = this.ProductsQuery
       .valueChanges.subscribe(({ data, loading }) => {
         this.loading = loading;
-        //console.log("entra en querySubscription")
-        //console.log("Como Entrega los PRod:",data.products);       
+        console.log("entra en querySubscription")
+        console.log("Como Entrega los PRod:",data.products);       
         this.getAllProducts = data.products;
         this.refresh();
       });
-    //console.log(this.querySubscription)
+    console.log(this.querySubscription)
   }
 
   refresh():void{
@@ -79,14 +80,15 @@ export class ProductComponent implements OnInit {
       })
       .valueChanges.subscribe(({ data, loading }) => {
         this.loading2 = loading;
-        //console.log(data.users);
+        console.log(data.users);
         this.getAllUsers = data.users;
       });
   }
 
+  /*
   ngOnDestroy(): void {
     this.querySubscription.unsubscribe();
     this.querySubscriptionUsers.unsubscribe();
   }
-
+  */
 }

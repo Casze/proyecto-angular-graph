@@ -7,7 +7,6 @@ import { LoginComponent } from './page/login/login.component';
 import { CreateproductComponent } from './page/createproduct/createproduct.component';
 import { DeleteproductComponent } from './page/deleteproduct/deleteproduct.component';
 import { UpdateproductComponent } from './page/updateproduct/updateproduct.component';
-import { CartComponent } from './page/cart/cart.component';
 
 
 const routes: Routes = [
@@ -19,7 +18,6 @@ const routes: Routes = [
   { path: 'create', component: CreateproductComponent},
   { path: 'delete', component: DeleteproductComponent},
   { path: 'update', component: UpdateproductComponent},
-  { path: 'carrito', component: CartComponent},
   { path: '**',redirectTo:'/inicio',pathMatch:'full'}
 ];
 

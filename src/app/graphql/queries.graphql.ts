@@ -125,16 +125,6 @@ const mutation_UpdateProduct2 = gql`
   }
 `;
 
-const mutation_AddCart  = gql`
-  mutation AddProductToUser($userId: Int!, $productId: Int!) {
-    addProductToUser(userId: $userId, productId: $productId){
-        id
-        name
-        }
-      }
-  }
-`;
-
 
 
 
@@ -208,7 +198,6 @@ export {
     LOGIN_MUTATION,
     //query_ProductsByUser,
 
-    mutation_AddCart,
     MUTATION_CreateProduct,
     mutation_Register, // Listo
     mutation_CreateProduct, // Listo

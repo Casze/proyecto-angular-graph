@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { loginRequest } from './loginRequest';
 import gql from 'graphql-tag';
 import { Apollo } from 'apollo-angular';
 import { LOGIN_MUTATION } from 'src/app/graphql/queries.graphql';
@@ -6,8 +7,6 @@ import { BehaviorSubject, Observable, map, tap} from 'rxjs';
 import { User } from './user';
 import { ApolloError } from '@apollo/client/core';
 import { userName } from './userName';
-import { loginRequest } from './loginRequest';
-import { datosLog } from './datosLOG';
 
 @Injectable({
   providedIn: 'root'
@@ -16,47 +15,38 @@ export class LoginService {
 
   nameis:string;
   currentUserLoginOn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-  currentUserData: BehaviorSubject<number> = new BehaviorSubject<number>(null);
+  currentUserData: BehaviorSubject<User> = new BehaviorSubject<User>({id:0});
   currentUserName: BehaviorSubject<String> = new BehaviorSubject<String>('');
-  currentUserDataLogin: BehaviorSubject<datosLog> = new BehaviorSubject<datosLog>({login:{access_token: '', user: {id: 0, name: ''}}});
+
   constructor(private apollo: Apollo) {}
 
-  login(credentials: loginRequest): Observable<any> { // Tipo de retorno explícito    
-    //console.log("Datos de la credencia?",credentials.name, credentials.password)
+  login(credentials: loginRequest): Observable<User> { // Tipo de retorno explícito    
+    console.log("Datos de la credencia?",credentials.name, credentials.password)
     return this.apollo.mutate({
-      mutation: LOGIN_MUTATION, // Usar mi consulta de mutación real aquí
+      mutation: LOGIN_MUTATION, // Usa tu consulta de mutación real aquí
       variables: {
         name: credentials.name,
         password: credentials.password,
       },
     }).pipe(      
         map(result => { 
-        //console.log("Resltado de", result.data);
-        //console.log("*/*/*?",result.data);
-        return result.data;        
+        console.log("Resltado de", result);
+        console.log("*/*/*?",result.data);
+        return result.data as User;        
       }),
-      tap( (userData: any) =>{   
-        //se vuelve true     
+      tap( (userData: User) =>{
+        this.currentUserData.next(userData);
         this.currentUserLoginOn.next(true);
-        // Obtengo todo
-        this.currentUserDataLogin.next(userData);
-
-        this.currentUserData.next(this.currentUserDataLogin.value.login.user.id);
-
         this.currentUserName.next(credentials.name);
-        console.log("access_token",this.currentUserDataLogin.value.login.access_token);
-        console.log("token solo para verificar que esta");
-        
-        //console.log("Que es currentUserDataLogin?",this.currentUserDataLogin);
-        //console.log("Que es currentUserData?",this.currentUserData.value);
-
-        //console.log("Asu se Obtiene ID:",this.currentUserDataLogin.value.login.user.id);
+        console.log("Hace userData?",userData);
+        console.log("Hace currentUserData?",this.currentUserData);
+        console.log("Hace currentUserData.value.id?",this.currentUserData.value);
       })
     );
   }
 
-  get userData():Observable<number>{
-    return this.currentUserData;
+  get userData():Observable<User>{
+    return this.currentUserData.asObservable();
   }
 
   get userLoginON():Observable<boolean>{
@@ -66,15 +56,6 @@ export class LoginService {
   get userNameLoginON(): Observable<String> {
     return this.currentUserName.asObservable();
   }
-
-
-}
-
-
-
-
-
-/*
 
   // MIN 1.00.00
   private handleError(error: ApolloError): void {
@@ -95,5 +76,22 @@ export class LoginService {
       console.error("Se ha producido un error desconocido:", error);
     }
   }
+
+}
+
+
+
+
+
+
+/* 
+
+return this.apollo.mutate({
+      mutation: LOGIN_MUTATION,
+      variables: {
+        name: credentials.name,
+        password: credentials.password
+      }
+    });
 
 */
