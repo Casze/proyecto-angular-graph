@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Route, Router } from '@angular/router';
 import { Apollo } from 'apollo-angular';
 import { Subscription } from 'rxjs';
@@ -10,7 +10,7 @@ import { mutation_Register } from 'src/app/graphql/queries.graphql';
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
-export class RegisterComponent {
+export class RegisterComponent implements OnInit,OnDestroy{
 
   loading: boolean;
   userName = '';
@@ -24,6 +24,13 @@ export class RegisterComponent {
     private apollo: Apollo,
     private router: Router,
   ) {}
+  ngOnInit(): void {
+    
+  }
+  ngOnDestroy(): void {
+    if (this.querySubscription) {
+      this.querySubscription.unsubscribe();
+    }}
 
   OnRegister(): void {
     // Expresiones regulares para validar letras y números

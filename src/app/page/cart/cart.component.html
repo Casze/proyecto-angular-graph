@@ -45,10 +45,10 @@
                   <div class="d-flex flex-row align-items-center mb-1">
                     <h4 class="mb-1 me-1">{{ product.price | currency:'USD':'symbol':'1.0-0' }}</h4>
                   </div>
-                  <h6 class="text-success">Free shipping</h6>
+                  <h6 class="text-success"></h6>
                   <div class="d-flex flex-column mt-4">
                <!-- <button class="btn btn-primary btn-sm" type="button">Details</button> -->
-                    <button class="btn btn-outline-primary btn-sm mt-2" type="button" >
+                    <button class="btn btn-outline-primary btn-sm mt-2" type="button" (click)="removeProduct(product)">
                       Delete
                     </button>
                   </div>

@@ -29,6 +29,7 @@ const query_GetAllUser = gql`
 const query_GetProductsUser = gql`
   query ProductsByUser($name: String!) { 
     productsByUser(name: $name) {
+      id
       name
       description
       price
@@ -125,6 +126,12 @@ mutation AddProductToUser($userId: Int!, $productId: Int!) {
 }
 `;
 
+const mutation_RemoveProductToUser = gql`
+  mutation RemoveProductToUser($userId: Int!, $productId: Int!) {
+    removeProductFromUser(userId: $userId, productId: $productId)     
+  }
+`;
+
 
 export {
     query_GetAllProducts, // Listo
@@ -137,6 +144,7 @@ export {
     //query_ProductsByUser,
 
     mutation_AddProductToUser,
+    mutation_RemoveProductToUser,
 
     MUTATION_CreateProduct,
     mutation_Register, // Listo

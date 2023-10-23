@@ -139,5 +139,7 @@ export class UpdateproductComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     if (this.querySubscription) this.querySubscription.unsubscribe();
+    if (this.querySubscriptionAdmin) this.querySubscriptionAdmin.unsubscribe();
+    
   }
 }

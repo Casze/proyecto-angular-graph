@@ -1,5 +1,5 @@
 
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Route, Router } from '@angular/router';
 import { Apollo, QueryRef } from 'apollo-angular';
 import { Subscription } from 'rxjs';
@@ -14,7 +14,7 @@ import { LoginService } from 'src/app/services/auth/login.service';
   templateUrl: './admin.component.html',
   styleUrls: ['./admin.component.css']
 })
-export class AdminComponent {
+export class AdminComponent implements OnInit,OnDestroy{
 
   userLoginOn:Boolean;
   userData?:number;

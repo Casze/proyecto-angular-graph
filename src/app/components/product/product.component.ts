@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Apollo, QueryRef, gql } from 'apollo-angular';
 import { Subscription } from 'rxjs';
-import { mutation_AddProductToUser, query_GetAllProducts, query_GetAllUser } from 'src/app/graphql/queries.graphql';
+import { mutation_AddProductToUser, query_GetAllProducts, query_GetAllUser, query_GetProductsUser } from 'src/app/graphql/queries.graphql';
 import { LoginService } from 'src/app/services/auth/login.service';
 import { User } from 'src/app/services/auth/user';
 
@@ -12,7 +12,7 @@ import { User } from 'src/app/services/auth/user';
   templateUrl: './product.component.html',
   styleUrls: ['./product.component.css']
 })
-export class ProductComponent implements OnInit {
+export class ProductComponent implements OnInit, OnDestroy{
 
   userLoginOn:Boolean;
   userData?:number;
@@ -100,7 +100,10 @@ export class ProductComponent implements OnInit {
 
     this.apolloAdd.mutate({
         mutation: mutation_AddProductToUser,
-        variables: { userId: this.userData, productId: product.id },
+        variables: { userId: this.userData, productId: product.id },refetchQueries: [{
+          query: query_GetProductsUser,
+          variables: { name: this.userData }, // asegúrate de que las variables sean correctas para tu consulta
+        }],
       })
       .subscribe(() => {
         console.log('Producto Agregado');
@@ -109,10 +112,10 @@ export class ProductComponent implements OnInit {
       };
   }
 
-  /*
+  
   ngOnDestroy(): void {
     this.querySubscription.unsubscribe();
     this.querySubscriptionUsers.unsubscribe();
   }
-  */
+  
 }

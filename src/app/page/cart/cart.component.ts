@@ -1,8 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 
 import { Apollo, QueryRef, gql } from 'apollo-angular';
 import { Subscription } from 'rxjs';
-import { mutation_AddProductToUser, query_GetAllProducts, query_GetAllUser, query_GetProductsUser } from 'src/app/graphql/queries.graphql';
+import { mutation_AddProductToUser, mutation_RemoveProductToUser, query_GetAllProducts, query_GetAllUser, query_GetProductsUser } from 'src/app/graphql/queries.graphql';
 import { LoginService } from 'src/app/services/auth/login.service';
 import { User } from 'src/app/services/auth/user';
 
@@ -11,7 +11,7 @@ import { User } from 'src/app/services/auth/user';
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.css']
 })
-export class CartComponent {
+export class CartComponent implements OnInit, OnDestroy  {
 
   userLoginOn:Boolean;
   userData?:number;
@@ -61,10 +61,9 @@ export class CartComponent {
   
   loadProductsUser(): void {
     console.log("id user login", this.userData);
-
-    // Suponiendo que this.userData tiene una propiedad 'name' que quieres usar
-    const userName = this.userName;
-
+  
+    const userName = this.userName; // Suponiendo que esto es correcto y userName tiene un valor adecuado
+  
     this.querySubscriptionUsers = this.apollo
       .watchQuery<any>({
         query: query_GetProductsUser,
@@ -74,20 +73,54 @@ export class CartComponent {
       })
       .valueChanges.subscribe(({ data, loading }) => {
         this.loading2 = loading;        
-        // Asumiendo que quieres almacenar los productos en 'this.getAllUsers'
-        this.getAllUsers = data.productsByUser; // asegúrate de que esto coincida con la estructura de tus datos
+        this.getAllUsers = data.productsByUser;
         console.log("Los productos del user", this.getAllUsers);
       }, (error) => {
         console.error('Error al cargar productos: ', error);
       });
   }
 
-  //===============================================================
   
-  /*
+
+  //===============================================================
+
+
+  removeProduct(product: any): void {
+    console.log("id user login", this.userData, product.id);
+  
+    this.apolloAdd.mutate({
+      mutation: mutation_RemoveProductToUser,
+      variables: { 
+        userId: this.userData, 
+        productId: product.id 
+      },refetchQueries: [
+        {
+          query: query_GetProductsUser,
+          variables: { name: this.userName }, // usa las variables correctas para la consulta
+        },
+      ],
+    }).subscribe(
+      (response: any) => {
+        console.log("Eliminno???:",response.data.removeProductFromUser)
+        if(response.data.removeProductFromUser) {
+          console.log('Producto Eliminado');
+          this.loadProductsUser(); // recargar los productos después de la eliminación
+        } else {
+          console.error('No se pudo eliminar el producto');
+          alert('No se pudo eliminar el producto');
+        }
+      },
+      (error: any) => {
+        console.error('Error al eliminar el producto:', error);
+        alert('Error al eliminar el producto: ' + error.message);
+      }
+    );
+  }
+  
+  
   ngOnDestroy(): void {
     this.querySubscription.unsubscribe();
     this.querySubscriptionUsers.unsubscribe();
   }
-  */
+  
 }
