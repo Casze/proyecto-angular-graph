@@ -12,7 +12,7 @@ import { userName } from 'src/app/services/auth/userName';
 export class HeaderComponent implements OnInit {
 
   userLoginOn: Boolean;
-  userData?: User;
+  userData?: number;
   userName:String;
   private subscription: Subscription;
 

@@ -49,27 +49,6 @@ const LOGIN_MUTATION  = gql`
   }
 `;
 
-/*
-
-const LOGIN_MUTATION  = gql`
-  mutation Login($name: String!, $password: String!) {
-    login(
-      loginUserInput: {name: $name, password: $password}){
-        access_token
-        user {
-          id
-          name
-          email
-          products{
-            id
-          }
-        }
-      }
-  }
-`;
-
-*/
-
 const mutation_CreateProduct = gql`
   mutation CreateProduct($name: String!, $category: String!, $price: Float!, $image: String!, $username: String!, $description: String!){
       createProduct( 
@@ -125,71 +104,14 @@ const mutation_UpdateProduct2 = gql`
   }
 `;
 
-
-
-
-/*
-const mutation_UpdateProduct = gql`
-  mutation UpdateProduct($id: Int!, $updateProductInput: {UpdateProductInput!}) {
-    updateProduct( id: $id, updateProductInput: {
-        name: $name 
-        category: $category 
-        price: $price 
-        image: $image 
-        username: $username 
-        description: $description
-        id: $id
-      }) {
-      id
-      name
-    }
+const mutation_AddProductToUser = gql`
+mutation AddProductToUser($userId: Int!, $productId: Int!) {
+  addProductToUser(userId: $userId, productId: $productId) {
+    id
+    name            
   }
+}
 `;
-*/
-/*
-const query_ProductsByUser = gql`
-  query ProductsByUser($name: String!) {
-    productsByUser(name: $name) {
-      id
-      name
-      category
-      price
-      description
-      image
-      username
-      user {
-        // Si también necesitas campos del tipo User, agrégalos aquí
-      }
-    }
-  }
-`;
-*/
-
-/*
-const mutation_UpdateProduct = gql`
-  mutation UpdateProduct($id: Int!, $updateProductInput: UpdateProductInput!) {
-    updateProduct(id: $id, updateProductInput: $updateProducstInput) {
-      id
-      name
-      category
-      price
-      description
-      image
-      username
-      user {
-        id
-        name
-        email
-      }
-    }
-  }
-`;
-const mutation_DeleteProduct = gql`
-  mutation DeleteProduct($id: Int!) {
-    deleteProduct(id: $id)
-  }
-`;
-*/
 
 
 export {
@@ -197,6 +119,8 @@ export {
     query_GetAllUser,  // Listo
     LOGIN_MUTATION,
     //query_ProductsByUser,
+
+    mutation_AddProductToUser,
 
     MUTATION_CreateProduct,
     mutation_Register, // Listo

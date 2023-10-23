@@ -17,7 +17,7 @@ export class UpdateproductComponent implements OnInit, OnDestroy {
   successMessage: string = '';
   
   userLoginOn: Boolean;
-  userData?: User;
+  userData?: number;
   loading: boolean = false;
   
   // Update

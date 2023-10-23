@@ -19,7 +19,7 @@ export class CreateproductComponent implements OnInit, OnDestroy {
   successMessage: string = '';
   
   userLoginOn: Boolean;
-  userData?: User;
+  userData?: number;
   userName: String;
   loading: boolean = false;
   

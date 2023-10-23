@@ -1,9 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Apollo, QueryRef } from 'apollo-angular';
+import { Apollo, QueryRef, gql } from 'apollo-angular';
 import { Subscription } from 'rxjs';
-import { query_GetAllProducts, query_GetAllUser } from 'src/app/graphql/queries.graphql';
+import { mutation_AddProductToUser, query_GetAllProducts, query_GetAllUser } from 'src/app/graphql/queries.graphql';
 import { LoginService } from 'src/app/services/auth/login.service';
 import { User } from 'src/app/services/auth/user';
+
+
 
 @Component({
   selector: 'app-product',
@@ -13,7 +15,7 @@ import { User } from 'src/app/services/auth/user';
 export class ProductComponent implements OnInit {
 
   userLoginOn:Boolean;
-  userData?:User;
+  userData?:number;
 
   loading: boolean;
   loading2: boolean;
@@ -28,6 +30,7 @@ export class ProductComponent implements OnInit {
 
   constructor(
     private apollo: Apollo,
+    private apolloAdd: Apollo,
     private loginService : LoginService,    
     
     ) {}
@@ -43,13 +46,16 @@ export class ProductComponent implements OnInit {
           this.userLoginOn=userLoginOn;
         }
     });
+    
     this.loginService.currentUserData.subscribe(
       {
         next:(userData) => {
           this.userData=userData;
         }
     });
+    
     console.log("Estado", this.userLoginOn);
+    console.log("ID", this.userData);
   }
 
   loadProducts(): void {
@@ -83,6 +89,22 @@ export class ProductComponent implements OnInit {
         console.log(data.users);
         this.getAllUsers = data.users;
       });
+  }
+
+  //===============================================================
+  
+  AddProduct(product: any):void {
+    console.log("id user login",this.userData)
+
+    this.apolloAdd.mutate({
+        mutation: mutation_AddProductToUser,
+        variables: { userId: this.userData, productId: product.id },
+      })
+      .subscribe(() => {
+        console.log('Producto Agregado');
+      }), (err: any) => {
+        alert(err);
+      };
   }
 
   /*
