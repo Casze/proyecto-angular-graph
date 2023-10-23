@@ -1,6 +1,15 @@
 <section style="background-color: #eee;">
     <div class="container py-5">
-      <h5></h5>
+      <div class="container">
+        <div class="row">
+          <div class="col text-center py-3"> <!-- Centrado horizontal y padding vertical -->
+            <i class="fas fa-cubes fa-3x" style="color: #17a2b8;"></i> <!-- Icono más grande y color azul claro -->
+            <h1 class="fw-bold d-inline-block ms-2" style="color: #17a2b8;">Mi Carrito</h1> <!-- Título más grande y color azul claro -->
+          </div>
+        </div>
+      </div>
+      
+      <div *ngIf="userLoginOn; else pleaseLogin"> 
       <div class="row justify-content-center mb-3" *ngFor="let product of getAllUsers">
         <div class="col-md-12 col-xl-10">        
           <div class="card shadow-0 border rounded-3">
@@ -40,7 +49,7 @@
                   <div class="d-flex flex-column mt-4">
                <!-- <button class="btn btn-primary btn-sm" type="button">Details</button> -->
                     <button class="btn btn-outline-primary btn-sm mt-2" type="button" >
-                      Add to Cart
+                      Delete
                     </button>
                   </div>
                 </div>
@@ -49,5 +58,17 @@
           </div>
         </div>
       </div>
+      </div>
+
+      <ng-template #pleaseLogin>
+        <div class="container">
+          <div class="row">
+            <div class="col text-center py-3"> <!-- Centrado horizontal y padding vertical -->
+              <i class="fas fa-cubes fa-3x" style="color: #17a2b8;"></i> <!-- Icono más grande y color azul claro -->
+              <h1 class="fw-bold d-inline-block ms-2" style="color: #17a2b8;">Iniciar sesion para ver Mi Carrito</h1> <!-- Título más grande y color azul claro -->
+            </div>
+          </div>
+        </div>
+      </ng-template>
     </div>
   </section>
