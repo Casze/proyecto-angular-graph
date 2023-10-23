@@ -4,17 +4,16 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
  
 // We use the gql tag to parse our query string into a query document
 const query_GetAllProducts = gql`
-    query {
-        products{
-        id,
-        name,
-        category,
-        price,
-        description,
-        image,
-        username
-        }
-    }
+  query {
+    products {
+      id
+      name
+      category
+      price
+      description
+      image
+    }  
+}
 `;
 const query_GetAllUser = gql`
     query {
@@ -34,9 +33,42 @@ const mutation_Register = gql`
         name
         password
       }
-    }
-  `
+  }
+`
 ;
+const LOGIN_MUTATION  = gql`
+  mutation Login($name: String!, $password: String!) {
+    login(
+      loginUserInput: {name: $name, password: $password}){
+        access_token
+        user {
+          id
+          name
+        }
+      }
+  }
+`;
+
+/*
+
+const LOGIN_MUTATION  = gql`
+  mutation Login($name: String!, $password: String!) {
+    login(
+      loginUserInput: {name: $name, password: $password}){
+        access_token
+        user {
+          id
+          name
+          email
+          products{
+            id
+          }
+        }
+      }
+  }
+`;
+
+*/
 
 const mutation_CreateProduct = gql`
   mutation CreateProduct($name: String!, $category: String!, $price: Float!, $image: String!, $username: String!, $description: String!){
@@ -82,6 +114,7 @@ const mutation_UpdateProduct2 = gql`
     }
   }
 `;
+
 
 
 
@@ -152,6 +185,7 @@ const mutation_DeleteProduct = gql`
 export {
     query_GetAllProducts, // Listo
     query_GetAllUser,  // Listo
+    LOGIN_MUTATION,
     //query_ProductsByUser,
 
     mutation_Register, // Listo
@@ -159,4 +193,5 @@ export {
     mutation_UpdateProduct, // hay un error no se cual
     mutation_UpdateProduct2, // hay un error no se cual
     mutation_DeleteProduct // Listo
+    
     }

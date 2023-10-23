@@ -29,7 +29,8 @@
               <li class="nav-item">
                   <a class="nav-link" href="#">Categories</a>
               </li>
-              <li class="nav-item" *ngIf="userLoginOn">
+              <!-- userLoginOn -->
+              <li class="nav-item" *ngIf="!userLoginOn">
                   <a class="nav-link" routerLink="/admin">Admin</a>
               </li>
           </ul>
@@ -42,17 +43,20 @@
         
         <!-- Navbar dropdown -->
         <li class="nav-item dropdown">
-          
+         <!-- !userLoginOn --> 
         <li class="nav-item" *ngIf="!userLoginOn">
             <a class="nav-link active" routerLink="/register">Sign up</a>
         </li>
-        <li class="nav-item" *ngIf="userLoginOn">
+        <!-- userLoginOn -->
+        <li class="nav-item" *ngIf="!userLoginOn">
             <a class="nav-link active"  aria-current="page">Name User</a>
         </li>
+        <!-- !userLoginOn -->
         <li class="nav-item" *ngIf="!userLoginOn">
             <a class="nav-link active" aria-current="page" href="/iniciar-sesion">Sign in</a>
         </li>
-        <li class="nav-item" *ngIf="userLoginOn">
+        <!-- userLoginOn -->
+        <li class="nav-item" *ngIf="!userLoginOn">
             <a class="nav-link active" aria-current="page" href="/">Sing out</a>
         </li>
           

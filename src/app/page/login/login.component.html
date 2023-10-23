@@ -24,7 +24,7 @@
                     <!-- User Name -->
                     <div class="form-outline mb-4">
                       <label class="form-label" for="form2Example17">User</label>
-                      <input formControlName="name" type="email" id="form2Example17" class="form-control form-control-lg" />
+                      <input formControlName="name" type="text" id="form2Example17" class="form-control form-control-lg" />
                       <!-- User Name Verificacion --> 
                       <div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert">
                         <div *ngIf="name.errors?.['required']">
@@ -32,7 +32,8 @@
                         </div>
                       </div>
                     </div>
-                    <!-- Fin User Name -->
+                    <!-- Fin User Name -->                    
+                    <p class="text-darger">{{loginError}}</p>
                     <!-- Password -->
                     <div class="form-outline mb-4">
                       <label class="form-label" for="form2Example27">Password</label>

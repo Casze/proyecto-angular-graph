@@ -30,18 +30,23 @@ export class ProductComponent implements OnInit, OnDestroy {
 
   loadProducts(): void {
 
+    console.log("loadProducts")
+
     this.ProductsQuery = this.apollo
     .watchQuery<any>({
       query: query_GetAllProducts,
     })
+    console.log(this.ProductsQuery)
 
     this.querySubscription = this.ProductsQuery
       .valueChanges.subscribe(({ data, loading }) => {
         this.loading = loading;
+        console.log("entra en querySubscription")
         console.log(data.products);       
         this.getAllProducts = data.products;
         this.refresh();
       });
+    console.log(this.querySubscription)
   }
 
   refresh():void{

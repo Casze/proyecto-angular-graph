@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Apollo } from 'apollo-angular';
+import { LoginService } from 'src/app/services/auth/login.service';
+import { loginRequest } from 'src/app/services/auth/loginRequest';
 
 
 
@@ -11,16 +14,18 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit{
 
-  loginForm = this.fb.group({
-    name: ['admin',[Validators.required]],
-    password: ['',[Validators.required]],
+  loginForm = this.formBuilder.group({  // 'formBuilder' starts with a lowercase
+    name: ['', [Validators.required]],
+    password: ['', [Validators.required]],
   });
 
-  constructor(
-    private fb: FormBuilder,
-    private router: Router,
+  loginError: string="";
 
-    ) {}
+  constructor(
+  private formBuilder: FormBuilder, // Changed 'FormBuilder' to 'formBuilder'
+  private router: Router,
+  private loginService: LoginService,
+) {}
 
   ngOnInit(): void {
     
@@ -35,9 +40,20 @@ export class LoginComponent implements OnInit{
 
   login(){
     if(this.loginForm.valid){
-      this.router.navigateByUrl('/inicio');
-      this.loginForm.reset();
-
+      this.loginService.login(this.loginForm.value as loginRequest).subscribe({
+        next: (userData) => {
+          console.log("Datos recuperados",userData);
+        },
+        error: (errorData) => {
+          console.log(errorData);
+          this.loginError=errorData;
+        },
+        complete: () =>{
+          console.log("Login Completo");
+          this.router.navigate(['/']);
+          this.loginForm.reset();
+        }
+      });
     }
     else{
       this.loginForm.markAllAsTouched()
