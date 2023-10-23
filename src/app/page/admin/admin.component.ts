@@ -93,13 +93,14 @@ export class AdminComponent {
     this.isButtonEnabled = false;
     this.apolloCrate.mutate({
       mutation: mutation_CreateProduct,
-      variables:{     
+      variables:{  
+        productsInput:{   
         name: this.Create_name,
         category: this.Create_category,
         price: parseFloat(this.Create_price),
         image: this.Create_image,
         username: this.Create_username,
-        description: this.Create_description
+        description: this.Create_description}
       },
     }).subscribe(() => {
       this.router.navigate(['/admin']);
@@ -109,7 +110,7 @@ export class AdminComponent {
   }
 
   //===============================================================================
-  // Crear Producto
+  // Update Producto
   UpdateProduct():void{
     this.apolloUpdate.mutate({
       mutation: mutation_UpdateProduct2,
@@ -229,6 +230,9 @@ export class AdminComponent {
       alert(err);
     };
     this.isButtonEnabledD=false;
+  }
+  ngOnDestroy() {
+    if (this.querySubscription) this.querySubscription.unsubscribe();
   }
 
   

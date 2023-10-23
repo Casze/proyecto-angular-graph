@@ -14,6 +14,9 @@ import { LoginComponent } from './page/login/login.component';
 import { HeaderComponent } from './shader/header/header.component';
 import { RegisterComponent } from './page/register/register.component';
 import { AdminComponent } from './page/admin/admin.component';
+import { CreateproductComponent } from './page/createproduct/createproduct.component';
+import { UpdateproductComponent } from './page/updateproduct/updateproduct.component';
+import { DeleteproductComponent } from './page/deleteproduct/deleteproduct.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +28,9 @@ import { AdminComponent } from './page/admin/admin.component';
     HeaderComponent,
     RegisterComponent,
     AdminComponent,
+    CreateproductComponent,
+    UpdateproductComponent,
+    DeleteproductComponent,
   ],
   imports: [
     BrowserModule,

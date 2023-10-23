@@ -85,11 +85,9 @@ const mutation_CreateProduct = gql`
 
 const MUTATION_CreateProduct = gql`
   mutation CreateProduct($productsInput: CreateProductInput!){
-      createProduct( productsInput: {name: $name, category: $category, price: $price, image: $image, username: $username, description: $description}) {
+      createProduct( productsInput: $productsInput) {
         id
-        name 
-        price
-        image
+        name
       }    
     }
   `
