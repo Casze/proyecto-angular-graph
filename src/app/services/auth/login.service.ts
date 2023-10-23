@@ -6,15 +6,17 @@ import { LOGIN_MUTATION } from 'src/app/graphql/queries.graphql';
 import { BehaviorSubject, Observable, map, tap} from 'rxjs';
 import { User } from './user';
 import { ApolloError } from '@apollo/client/core';
+import { userName } from './userName';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
 
-
+  nameis:string;
   currentUserLoginOn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   currentUserData: BehaviorSubject<User> = new BehaviorSubject<User>({id:0});
+  currentUserName: BehaviorSubject<String> = new BehaviorSubject<String>('');
 
   constructor(private apollo: Apollo) {}
 
@@ -29,12 +31,14 @@ export class LoginService {
     }).pipe(      
         map(result => { 
         console.log("Resltado de", result.data);
+        console.log("*/*/*?",result.data);
         return result.data as User;        
       }),
       tap( (userData: User) =>{
         this.currentUserData.next(userData);
-        this.currentUserLoginOn.next(true);   
-        console.log("Hace esto?",this.currentUserData);
+        this.currentUserLoginOn.next(true);
+        this.currentUserName.next(credentials.name);
+        console.log("Hace esto?",credentials.name);
       })
     );
   }
@@ -45,6 +49,10 @@ export class LoginService {
 
   get userLoginON():Observable<boolean>{
     return this.currentUserLoginOn.asObservable();
+  }
+
+  get userNameLoginON(): Observable<String> {
+    return this.currentUserName.asObservable();
   }
 
   // MIN 1.00.00

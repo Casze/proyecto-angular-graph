@@ -10,7 +10,7 @@ import { UpdateproductComponent } from './page/updateproduct/updateproduct.compo
 
 
 const routes: Routes = [
-  { path: '', redirectTo:'/delete',pathMatch:'full'},
+  { path: '', redirectTo:'/inicio',pathMatch:'full'},
   { path: 'inicio', component: ProductComponent},
   { path: 'register', component: RegisterComponent},
   { path: 'admin', component: AdminComponent},
@@ -18,7 +18,7 @@ const routes: Routes = [
   { path: 'create', component: CreateproductComponent},
   { path: 'delete', component: DeleteproductComponent},
   { path: 'update', component: UpdateproductComponent},
-  { path: '**',redirectTo:'',pathMatch:'full'}
+  { path: '**',redirectTo:'/inicio',pathMatch:'full'}
 ];
 
 @NgModule({

@@ -1,1 +1,132 @@
-<p>updateproduct works!</p>
+<section class="vh-100" style="background-color: #9A616D;">
+<!-- Contenedor principal para la actualización de productos -->
+<div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col col-xl-10">
+            <!-- Tarjeta para la actualización de productos -->
+            <div class="card" style="border-radius: 1rem;">
+                <div class="row g-0">
+                    <div class="col-md-6 col-lg-5 d-none d-md-block">
+                        <!-- Usa una imagen local si es posible para mejorar la carga -->
+                        <img 
+                            src="https://img.freepik.com/vector-premium/concepto-diseno-ilustracion-actualizacion-software-sistema-ilustracion-sitios-web-paginas-destino-aplicaciones-moviles-carteles-pancartas_108061-821.jpg?w=740" 
+                            alt="Login Form" 
+                            class="img-fluid" 
+                            style="border-radius: 1rem 0 0 1rem;" />
+                    </div>
+                    <div class="col-md-6 col-lg-7 d-flex align-items-center">
+                        <div class="card-body p-4 p-lg-5 text-black">
+
+
+                            <div *ngIf="userLoginOn; else pleaseLogin">
+                            <!-- Título para la actualización de producto -->
+                                <div class="d-flex align-items-center mb-3 pb-1">
+                                    <i class="fas fa-cubes fa-2x me-3" style="color: #ff6219;"></i>
+                                    <span class="h1 fw-bold mb-0">Update Product</span>
+                                </div>
+
+                                <!-- Selección de producto para actualizar -->
+                                <div class="input-group mb-4">
+                                    <select class="form-select" 
+                                            aria-label="Select with button addon" 
+                                            id="inputGroupSelect04" 
+                                            (change)="updateSelectedProduct($event)">
+                                        <option selected disabled>ID - Product</option>
+                                        <option *ngFor="let product of AllProductsAdmin" [value]="product.id">{{product.id}} - {{product.name}}</option>
+                                    </select>
+                                </div>
+
+                                <!-- Formulario para actualizar producto -->
+                                <form novalidate #f="ngForm" (ngSubmit)="UpdateProduct()">
+
+                                    <!-- Campos para la actualización de detalles del producto -->
+
+                                    <!-- Nombre -->
+                                    <div class="form-outline mb-4">
+                                        <input type="text" 
+                                            id="Update_name" 
+                                            name="Update_name" 
+                                            class="form-control form-control-lg" 
+                                            placeholder="Name..." 
+                                            [(ngModel)]="Update_name" 
+                                            required>
+                                    </div>
+
+                                    <!-- Categoría -->
+                                    <div class="form-outline mb-4">
+                                        <input type="text" 
+                                            id="Update_category" 
+                                            name="Update_category" 
+                                            class="form-control form-control-lg" 
+                                            placeholder="Category..." 
+                                            [(ngModel)]="Update_category" 
+                                            required>
+                                    </div>
+
+                                    <!-- Precio -->
+                                    <div class="form-outline mb-4">
+                                        <input type="text" 
+                                            id="Update_price" 
+                                            name="Update_price" 
+                                            class="form-control form-control-lg" 
+                                            placeholder="Price..." 
+                                            [(ngModel)]="Update_price" 
+                                            pattern="^\d+(\.\d+)?$" 
+                                            required>
+                                    </div>
+
+                                    <!-- Imagen -->
+                                    <div class="form-outline mb-4">
+                                        <input type="text" 
+                                            id="Update_image" 
+                                            name="Update_image" 
+                                            class="form-control form-control-lg" 
+                                            placeholder="Image URL..." 
+                                            [(ngModel)]="Update_image" 
+                                            required>
+                                    </div>
+
+                                    <!-- Nombre de usuario -->
+                                    <div class="form-outline mb-4">
+                                        <input type="text" 
+                                            id="Update_username" 
+                                            name="Update_username" 
+                                            class="form-control form-control-lg" 
+                                            placeholder="Username..." 
+                                            [(ngModel)]="Update_username" 
+                                            required 
+                                            readonly>
+                                    </div>
+
+                                    <!-- Descripción -->
+                                    <div class="form-outline mb-4">
+                                        <input type="text" 
+                                            id="Update_description" 
+                                            name="Update_description" 
+                                            class="form-control form-control-lg" 
+                                            placeholder="Description..." 
+                                            [(ngModel)]="Update_description" 
+                                            required>
+                                    </div>
+
+                                    <!-- Botón de enviar -->
+                                    <div class="pt-1 mb-4">
+                                        <button class="btn btn-dark btn-lg btn-block" 
+                                                type="submit" 
+                                                [disabled]="!f.valid">Update</button>
+                                    </div>
+
+                                </form>
+
+                            </div>
+                            <ng-template #pleaseLogin>
+                                <p>Por favor, inicia sesión para crear un producto.</p>
+                            </ng-template>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</section>

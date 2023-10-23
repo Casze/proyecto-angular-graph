@@ -27,13 +27,13 @@
                   <a class="nav-link active" routerLink="/inicio">Home</a>
               </li>
               <!-- userLoginOn -->
-              <li class="nav-item" *ngIf="!userLoginOn">
+              <li class="nav-item" *ngIf="userLoginOn">
                   <a class="nav-link" routerLink="/create">Create</a>
               </li>
-              <li class="nav-item" *ngIf="!userLoginOn">
+              <li class="nav-item" *ngIf="userLoginOn">
                 <a class="nav-link" routerLink="/delete">Delete</a>
               </li>
-              <li class="nav-item" *ngIf="!userLoginOn">
+              <li class="nav-item" *ngIf="userLoginOn">
                 <a class="nav-link" routerLink="/update">Update</a>
               </li>
           </ul>
@@ -52,7 +52,7 @@
         </li>
         <!-- userLoginOn -->
         <li class="nav-item" *ngIf="userLoginOn">
-            <a class="nav-link active"  aria-current="page">{{userData.id}}</a>
+            <a class="nav-link active"  aria-current="page">{{userName}}</a>
         </li>
         <!-- !userLoginOn -->
         <li class="nav-item" *ngIf="!userLoginOn">
