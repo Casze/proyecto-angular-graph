@@ -15,17 +15,18 @@ export class CartComponent {
 
   userLoginOn:Boolean;
   userData?:number;
+  userName:String;
 
   loading: boolean;
   loading2: boolean;
 
   getAllProducts: any;
   getAllUsers: any;
+  
 
   private querySubscription: Subscription;
   private querySubscriptionUsers: Subscription;
   ProductsQuery: QueryRef<any>;
-  static getAllProducts: any;
 
   constructor(
     private apollo: Apollo,
@@ -34,9 +35,13 @@ export class CartComponent {
     
     ) {}
 
-  ngOnInit(): void {
-    this.loadProductsUser();
-
+  ngOnInit(): void { 
+    this.loginService.currentUserData.subscribe(
+      {
+        next:(userData) => {
+          this.userData=userData;
+        }
+    });   
     //Obtengo los datos y estado del usuario
     this.loginService.currentUserLoginOn.subscribe(
       {
@@ -44,47 +49,41 @@ export class CartComponent {
           this.userLoginOn=userLoginOn;
         }
     });
-    
-    this.loginService.currentUserData.subscribe(
-      {
-        next:(userData) => {
-          this.userData=userData;
-        }
+    // Suscripción para userName
+    const sub3 = this.loginService.userNameLoginON.subscribe(userName => {
+      this.userName = userName;
     });
-    
     console.log("Estado", this.userLoginOn);
     console.log("ID", this.userData);
+    this.loadProductsUser();
   }
 
   
   loadProductsUser(): void {
+    console.log("id user login", this.userData);
+
+    // Suponiendo que this.userData tiene una propiedad 'name' que quieres usar
+    const userName = this.userName;
+
     this.querySubscriptionUsers = this.apollo
       .watchQuery<any>({
         query: query_GetProductsUser,
+        variables: {
+          name: userName, // pasando 'name' a la consulta
+        },
       })
       .valueChanges.subscribe(({ data, loading }) => {
-        this.loading2 = loading;
-        console.log("Los productos del user",data);
-        this.getAllUsers = data.users;
+        this.loading2 = loading;        
+        // Asumiendo que quieres almacenar los productos en 'this.getAllUsers'
+        this.getAllUsers = data.productsByUser; // asegúrate de que esto coincida con la estructura de tus datos
+        console.log("Los productos del user", this.getAllUsers);
+      }, (error) => {
+        console.error('Error al cargar productos: ', error);
       });
   }
 
   //===============================================================
   
-  AddProduct(product: any):void {
-    console.log("id user login",this.userData)
-
-    this.apolloAdd.mutate({
-        mutation: mutation_AddProductToUser,
-        variables: { userId: this.userData, productId: product.id },
-      })
-      .subscribe(() => {
-        console.log('Producto Agregado');
-      }), (err: any) => {
-        alert(err);
-      };
-  }
-
   /*
   ngOnDestroy(): void {
     this.querySubscription.unsubscribe();

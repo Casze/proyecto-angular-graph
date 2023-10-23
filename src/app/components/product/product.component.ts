@@ -60,10 +60,12 @@ export class ProductComponent implements OnInit {
 
   loadProducts(): void {
     console.log("loadProducts")
+
     this.ProductsQuery = this.apollo
     .watchQuery<any>({
       query: query_GetAllProducts,
     })
+    
     console.log(this.ProductsQuery)
     this.querySubscription = this.ProductsQuery
       .valueChanges.subscribe(({ data, loading }) => {
