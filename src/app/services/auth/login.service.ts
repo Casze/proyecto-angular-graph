@@ -38,6 +38,8 @@ export class LoginService {
         return result.data;     
       }),
       tap( (userData: any) =>{
+
+        this.currentUserLoginOn.next(true);
         // Obtengo todo
         this.currentUserDataLogin.next(userData);
 

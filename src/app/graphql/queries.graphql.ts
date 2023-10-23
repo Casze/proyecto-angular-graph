@@ -26,6 +26,18 @@ const query_GetAllUser = gql`
     }
 `;
 
+const query_GetProductsUser = gql`
+  query ProductsByUser($name: String!) { 
+    productsByUser(name: $name) {
+      name
+      description
+      price
+      category
+      image
+    } 
+  }
+`;
+
 const mutation_Register = gql`
   mutation Register($name: String!, $password: String!) {
     register(
@@ -116,7 +128,11 @@ mutation AddProductToUser($userId: Int!, $productId: Int!) {
 
 export {
     query_GetAllProducts, // Listo
-    query_GetAllUser,  // Listo
+    query_GetAllUser,
+    
+    query_GetProductsUser,
+
+    // Listo
     LOGIN_MUTATION,
     //query_ProductsByUser,
 

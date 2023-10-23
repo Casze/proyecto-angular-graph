@@ -33,6 +33,7 @@ export class HeaderComponent implements OnInit {
     const sub3 = this.loginService.userNameLoginON.subscribe(userName => {
       this.userName = userName;
     });
+    console.log("logeados??",this.userLoginOn)
   }
 
   ngOnDestroy(): void {
