@@ -1,20 +1,22 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Apollo, QueryRef } from 'apollo-angular';
 import { Subscription } from 'rxjs';
-import { query_GetAllProducts, query_GetAllUser } from 'src/app/graphql/queries.graphql';
+import {
+  query_GetAllProducts,
+  query_GetAllUser,
+} from 'src/app/graphql/queries.graphql';
 import { LoginService } from 'src/app/services/auth/login.service';
 import { User } from 'src/app/services/auth/user';
 
 @Component({
   selector: 'app-product',
   templateUrl: './product.component.html',
-  styleUrls: ['./product.component.css']
+  styleUrls: ['./product.component.css'],
 })
 export class ProductComponent implements OnInit, OnDestroy {
+  userLoginOn: Boolean = false;
 
-  userLoginOn:Boolean =false;
-
-  userData?:User;
+  userData?: User;
 
   loading: boolean;
   loading2: boolean;
@@ -27,53 +29,44 @@ export class ProductComponent implements OnInit, OnDestroy {
   ProductsQuery: QueryRef<any>;
   static getAllProducts: any;
 
-  constructor(
-    private apollo: Apollo,
-    private loginService : LoginService,    
-    
-    ) {}
+  constructor(private apollo: Apollo, private loginService: LoginService) {}
 
   ngOnInit(): void {
     this.loadProducts();
     this.loadUsers();
-    this.loginService.currentUserLoginOn.subscribe(
-      {
-        next:(userLoginOn) => {
-          this.userLoginOn=userLoginOn;
-        }
+    this.loginService.currentUserLoginOn.subscribe({
+      next: (userLoginOn) => {
+        this.userLoginOn = userLoginOn;
+      },
     });
-    this.loginService.currentUserData.subscribe(
-      {
-        next:(userData) => {
-          this.userData=userData;
-        }
+    this.loginService.currentUserData.subscribe({
+      next: (userData) => {
+        this.userData = userData;
+      },
     });
-      
-   
   }
 
   loadProducts(): void {
+    // console.log('loadProducts');
 
-    console.log("loadProducts")
-
-    this.ProductsQuery = this.apollo
-    .watchQuery<any>({
+    this.ProductsQuery = this.apollo.watchQuery<any>({
       query: query_GetAllProducts,
-    })
-    console.log(this.ProductsQuery)
+    });
+    // console.log(this.ProductsQuery);
 
-    this.querySubscription = this.ProductsQuery
-      .valueChanges.subscribe(({ data, loading }) => {
+    this.querySubscription = this.ProductsQuery.valueChanges.subscribe(
+      ({ data, loading }) => {
         this.loading = loading;
-        console.log("entra en querySubscription")
-        console.log(data.products);       
+        // console.log('entra en querySubscription');
+        console.log(data.products);
         this.getAllProducts = data.products;
         this.refresh();
-      });
-    console.log(this.querySubscription)
+      }
+    );
+    // console.log(this.querySubscription);
   }
 
-  refresh():void{
+  refresh(): void {
     this.ProductsQuery.refetch();
   }
 
@@ -89,9 +82,5 @@ export class ProductComponent implements OnInit, OnDestroy {
       });
   }
 
-  
-
-  ngOnDestroy(): void {
-  }
-
+  ngOnDestroy(): void {}
 }
