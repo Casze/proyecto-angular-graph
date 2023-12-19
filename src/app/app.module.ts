@@ -3,26 +3,36 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { GraphQLModule } from './graphql.module';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
-import { ProductComponent } from './components/product/product.component';
-import { UserComponent } from './components/user/user.component';
-import { PrimengModule } from './primeng/primeng.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HomeComponent } from './pages/home/home.component';
+import { HeaderComponent } from './components/header/header.component';
+import { CreateproductsComponent } from './pages/createproducts/createproducts.component';
+import { DeleteproductsComponent } from './pages/deleteproducts/deleteproducts.component';
+import { LoginComponent } from './auth/login/login.component';
+import { RegisterComponent } from './pages/register/register.component';
+import { CartComponent } from './pages/cart/cart.component';
+import { RecommendComponent } from './components/recommend/recommend.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    ProductComponent,
-    UserComponent
+    HomeComponent,
+    HeaderComponent,
+    CreateproductsComponent,
+    DeleteproductsComponent,
+    LoginComponent,
+    RegisterComponent,
+    CartComponent,
+    RecommendComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    GraphQLModule,
     HttpClientModule,
     FormsModule,
-    PrimengModule
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

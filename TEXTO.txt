@@ -6,5 +6,22 @@ https://www.youtube.com/watch?v=dy6GEHWLwrs&list=PL_9MDdjVuFjEOzJauNEz6_YfBuU5JR
 Login
 https://www.youtube.com/watch?v=jkdLRbrJj9M
 
-doc
+Documentacion
+https://getbootstrap.com/docs/5.0/components/navbar/
 https://www.npmjs.com/package/apollo-angular
+
+Product Cards
+https://mdbootstrap.com/docs/standard/extended/product-cards
+
+Login Card
+https://mdbootstrap.com/docs/standard/extended/login/#!
+
+NavBar
+https://mdbootstrap.com/docs/standard/extended/gradient-navbar
+
+
+Video min Actual 
+https://youtu.be/gXw9pmkgIKU?t=403
+
+
+Configurar boostrap si no se ve el diseño en min 9 de login
