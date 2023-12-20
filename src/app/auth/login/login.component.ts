@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators} from '@angular/forms';
 import { Router } from '@angular/router';
+import { LoginRequest } from 'src/app/interface/user';
 import { LoginService } from 'src/app/services/auth/login.service';
 
 @Component({
@@ -10,37 +11,52 @@ import { LoginService } from 'src/app/services/auth/login.service';
 })
 export class LoginComponent implements OnInit {
 
-  
+  loginError:string='';  
+
+  loginForm = this.fromBuilder.group({
+    username: ["", [Validators.required]],
+    password: ["",[Validators.required]],
+  })
 
   constructor(
     private fromBuilder:FormBuilder,
     private router:Router,
     private loginService:LoginService
   ) {}
-
-  loginForm = this.fromBuilder.group({
-    email: ["test@gmail.com", [Validators.required,Validators.email]],
-    password: ["",[Validators.required]],
-  })
+  
 
   ngOnInit(): void {
   }
-  get email(){
-    return this.loginForm.controls.email
+  get name(){
+    return this.loginForm.controls.username
   }
   get password(){
     return this.loginForm.controls.password
   }
 
-  login(){
-    if(this.loginForm.valid){
-      this.loginService.login(this.loginForm.value);
-      this.router.navigateByUrl('/home');
-      this.loginForm.reset();
-    }
-    else{
+  login() {
+    if (this.loginForm.valid) {
+      this.loginService.login(this.loginForm.value as LoginRequest).subscribe({
+        next: (success) => {
+          if (success) {
+            //console.log("Inicio de sesión exitoso");
+            this.router.navigate(['/dashboard']); // Asegúrate de reemplazar '/dashboard' con la ruta deseada
+            this.loginForm.reset();
+          } else {
+            this.loginError = "Credenciales incorrectas";
+          }
+        },
+        error: (errorData) => {
+          console.error(errorData);
+          this.loginError = "Error al iniciar sesión";
+        },
+        complete: () => {
+          //console.log("Proceso de login finalizado");
+        }
+      });
+    } else {
       this.loginForm.markAllAsTouched();
-      alert("Error al ingresar los datos");
+      alert("Por favor, completa todos los campos requeridos.");
     }
   }
 }

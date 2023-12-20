@@ -1,21 +1,51 @@
-import { Component, OnInit } from '@angular/core';
-import { UserDocument } from 'src/app/interface/user';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { User, UserDocument, UserLogeado } from 'src/app/interface/user';
+import { LoginService } from 'src/app/services/auth/login.service';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent implements OnInit{
+export class HeaderComponent implements OnInit,OnDestroy{
  
 
   userLoginOn: boolean = false;
+  userLoginOnUser: UserLogeado;
+  userLoginOnUserName: String = null;
 
-  constructor(){ }
-
-  ngOnInit(): void {
+  constructor(
+    private loginService:LoginService
+  ){ }
+  ngOnInit(): void {   
+    this.ObtenerUsuario() ;
+    //console.log("Logeado?",this.userLoginOn);
+    //console.log("Datos IDUser",this.userLoginOnUser);
+    //console.log("Datos User",this.userLoginOnUserName);
   }
 
+  
+  ObtenerUsuario(){
+    this.loginService.currentUserLoginOn.subscribe({
+      next:(userLoginOn)=>{
+        this.userLoginOn=userLoginOn;
+      }
+    });
+    this.loginService.currentUserId.subscribe({
+      next:(userLoginOnUser)=>{
+        this.userLoginOnUser=userLoginOnUser;
+      }
+    });
+    this.loginService.currentUserData.subscribe({
+      next:(userLoginOnUserName)=>{
+        this.userLoginOnUserName=userLoginOnUserName;
+      }
+    });
+  }
+
+  ngOnDestroy(): void {
+    throw new Error('Method not implemented.');
+  }
 }
 
 /* 

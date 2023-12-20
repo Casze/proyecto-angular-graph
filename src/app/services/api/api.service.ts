@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { UserDocument } from 'src/app/interface/user';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,9 @@ export class ApiService {
     return this.http.get<any>(`${this.apiUrl}/products/showAllProducts`); //recordar poner <any> si es lista
   }
 
-  getUserEjemplo() : Observable<any>{
-    return this.http.get(`${this.apiUrl}/users/657ddc170a6ad5248fc89b32`);
+  getUserLogeado(idUser:String) : Observable<UserDocument>{
+    return this.http.get<UserDocument>(`${this.apiUrl}/users/${idUser}`);
   }
+
+  
 }

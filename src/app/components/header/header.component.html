@@ -58,15 +58,15 @@
         </li>
         <!-- userLoginOn -->
         <li class="nav-item" >
-            <a class="nav-link active"  aria-current="page">userName</a>
+            <a class="nav-link active"  aria-current="page" *ngIf="userLoginOn">{{userLoginOnUserName}}</a>
         </li>
         <!-- !userLoginOn -->
         <li class="nav-item" >
-            <a class="nav-link active" aria-current="page" href="/login">Login</a>
+            <a class="nav-link active" aria-current="page" href="/login" *ngIf="!userLoginOn">Login</a>
         </li>
         <!-- userLoginOn -->
         <li class="nav-item" >
-            <a class="nav-link active" aria-current="page" href="/">LogOut</a>
+            <a class="nav-link active" aria-current="page" href="/" *ngIf="userLoginOn">LogOut</a>
         </li>
           
       </ul>

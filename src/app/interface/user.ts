@@ -9,6 +9,14 @@ export interface User{
 export interface UserDocument extends Document, User {}
 
 export interface LoginRequest{
-    email: String,
+    username: String,
     password: String
+}
+
+export interface UserLogeado{
+    _id:String
+}
+
+export interface UserLogeadoName{
+    username:String
 }
