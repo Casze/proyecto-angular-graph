@@ -16,6 +16,9 @@ import { RecommendComponent } from './components/recommend/recommend.component';
 import { TopventasComponent } from './pages/topventas/topventas.component';
 import { CategoryComponent } from './pages/category/category.component';
 import { RecomendadoComponent } from './pages/recomendado/recomendado.component';
+import { DescubrirComponent } from './pages/descubrir/descubrir.component';
+import { CompradenuevoComponent } from './pages/compradenuevo/compradenuevo.component';
+import { SimisimilaresComponent } from './pages/simisimilares/simisimilares.component';
 
 
 @NgModule({
@@ -32,6 +35,9 @@ import { RecomendadoComponent } from './pages/recomendado/recomendado.component'
     TopventasComponent,
     CategoryComponent,
     RecomendadoComponent,
+    DescubrirComponent,
+    CompradenuevoComponent,
+    SimisimilaresComponent,
   ],
   imports: [
     BrowserModule,

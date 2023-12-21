@@ -27,10 +27,10 @@ export class CategoryComponent implements OnInit {
     // Obtener datos de usuario Logeado
     this.ObtenerUserLogeado();
 
-    // Obtener los productos
+    // Obtener los productos por categorias
     this.Obtener_recommendElectronicsProducts();
     this.Obtener_recommendFurnitureProducts();
-    this.Obtener_recommendProductsClothes();
+    this.Obtener_recommendProductsClothes(this.userLoginOn);
     // Obtener los usuarios
     //this.ObtenerDataUser();
   }
@@ -69,12 +69,24 @@ export class CategoryComponent implements OnInit {
       console.log("recommendFurnitureProducts",this.furniture);
     });
   }
-  Obtener_recommendProductsClothes(){
+  Obtener_recommendProductsClothes(Logeado:boolean){
     console.log("PR id:",this.userLoginOnUser);
-    this.apiService.post_recommendProductsClothes(String(this.userLoginOnUser)).subscribe(datos => {
-      console.log("PR datos recommendProductsClothes:",datos);
-      this.clothes = datos;
-      console.log("recommendProductsClothes",this.clothes);
-    });
+    if(Logeado){
+      this.apiService.post_recommendProductsClothes(String(this.userLoginOnUser)).subscribe(datos => {
+        console.log("PR datos recommendProductsClothes:",datos);
+        if(datos.length >0){
+          this.clothes = datos;
+          console.log("recommendProductsClothes",this.clothes);
+        }
+        // Si es vacio se mantiene lo que ya existia;
+      });
+    }
+    else{
+      console.log("Entro a Rellenar:",this.clothes);
+      this.apiService.getProductByCategory(String("Clothes")).subscribe(datos => {
+        console.log("GET getProductByCategory:",datos);
+        this.clothes = datos;
+      });
+    }    
   }
 }

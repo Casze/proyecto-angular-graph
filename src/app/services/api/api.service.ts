@@ -23,8 +23,12 @@ export class ApiService {
     return this.http.get<any>(`${this.apiUrl}/products/showIdAndCategory`); //recordar poner <any> si es lista
   }
 
-  getProductByID(IdProduct:String) : Observable<UserDocument>{
-    return this.http.get<UserDocument>(`${this.apiUrl}/products/${IdProduct}`);
+  getProductByID(IdProduct:String) : Observable<any>{
+    return this.http.get<any>(`${this.apiUrl}/products/${IdProduct}`);
+  }
+
+  getProductByCategory(category:String) : Observable<any>{
+    return this.http.get<any>(`${this.apiUrl}/products/category/${category}`);
   }
 
 
@@ -39,7 +43,7 @@ export class ApiService {
   post_USER_registerUser(n: string,e: string,pass: string) : Observable<any>{
     return this.http.post<any>(`${this.apiUrl}/users/registerUser`,{name:n,email:e,password:pass}).pipe(
       tap((userData: any) => { 
-          console.log("registerUser:",userData);
+          //console.log("registerUser:",userData);
         }        
       ),
       catchError(this.handleError)
@@ -63,7 +67,7 @@ export class ApiService {
   postrecommendProducts(idUser:String) : Observable<any>{
     return this.http.post<any>(`${this.apiUrl}/neo4j/recommendProducts`,{userId:idUser}).pipe(
       tap((userData: any) => { 
-          console.log("postrecommendProducts:",userData);
+          //console.log("postrecommendProducts:",userData);
         }        
       ),
       catchError(this.handleError)
@@ -73,7 +77,7 @@ export class ApiService {
   post_recommendProductsClothes(idUser:String) : Observable<any>{
     return this.http.post<any>(`${this.apiUrl}/neo4j/recommendProductsClothes`,{userId:idUser}).pipe(
       tap((userData: any) => { 
-          console.log("recommendProductsClothes:",userData);
+          //console.log("recommendProductsClothes:",userData);
         }        
       ),
       catchError(this.handleError)
@@ -83,7 +87,7 @@ export class ApiService {
   post_recommendElectronicsProducts(idUser:String) : Observable<any>{
     return this.http.post<any>(`${this.apiUrl}/neo4j/recommendElectronicsProducts`,{userId:idUser}).pipe(
       tap((userData: any) => { 
-          console.log("recommendElectronicsProducts:",userData);
+          //console.log("recommendElectronicsProducts:",userData);
         }        
       ),
       catchError(this.handleError)
@@ -93,7 +97,7 @@ export class ApiService {
   post_recommendFurnitureProducts(idUser:String) : Observable<any>{
     return this.http.post<any>(`${this.apiUrl}/neo4j/recommendFurnitureProducts`,{userId:idUser}).pipe(
       tap((userData: any) => { 
-          console.log("recommendFurnitureProducts:",userData);
+          //console.log("recommendFurnitureProducts:",userData);
         }        
       ),
       catchError(this.handleError)
@@ -103,7 +107,7 @@ export class ApiService {
   post_recommendLaptopFurnitures(idUser:String) : Observable<any>{
     return this.http.post<any>(`${this.apiUrl}/neo4j/recommendLaptopFurnitures`,{userId:idUser}).pipe(
       tap((userData: any) => { 
-          console.log("recommendLaptopFurnitures:",userData);
+          //console.log("recommendLaptopFurnitures:",userData);
         }        
       ),
       catchError(this.handleError)

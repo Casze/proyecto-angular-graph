@@ -10,6 +10,9 @@ import { CartComponent } from './pages/cart/cart.component';
 import { CategoryComponent } from './pages/category/category.component';
 import { RecomendadoComponent } from './pages/recomendado/recomendado.component';
 import { TopventasComponent } from './pages/topventas/topventas.component';
+import { DescubrirComponent } from './pages/descubrir/descubrir.component';
+import { CompradenuevoComponent } from './pages/compradenuevo/compradenuevo.component';
+import { SimisimilaresComponent } from './pages/simisimilares/simisimilares.component';
 
 const routes: Routes = [
   { path: '', redirectTo:'home',pathMatch:'full'},
@@ -22,6 +25,9 @@ const routes: Routes = [
   { path: 'category', component: CategoryComponent},
   { path: 'recomendados', component: RecomendadoComponent},
   { path: 'topventas', component: TopventasComponent},
+  { path: 'descubrir', component: DescubrirComponent},
+  { path: 'comprardenuevo', component: CompradenuevoComponent},
+  { path: 'simisimilares', component: SimisimilaresComponent},
   { path: '**', redirectTo:'home', pathMatch:'full'}
 
 ];
