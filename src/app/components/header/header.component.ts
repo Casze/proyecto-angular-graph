@@ -44,7 +44,9 @@ export class HeaderComponent implements OnInit,OnDestroy{
   }
 
   ngOnDestroy(): void {
-    throw new Error('Method not implemented.');
+    this.loginService.currentUserData.unsubscribe();
+    this.loginService.currentUserId.unsubscribe();
+    this.loginService.currentUserLoginOn.unsubscribe();
   }
 }
 

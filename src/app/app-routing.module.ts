@@ -7,6 +7,9 @@ import { DeleteproductsComponent } from './pages/deleteproducts/deleteproducts.c
 import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { CartComponent } from './pages/cart/cart.component';
+import { CategoryComponent } from './pages/category/category.component';
+import { RecomendadoComponent } from './pages/recomendado/recomendado.component';
+import { TopventasComponent } from './pages/topventas/topventas.component';
 
 const routes: Routes = [
   { path: '', redirectTo:'home',pathMatch:'full'},
@@ -16,6 +19,9 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent},
   { path: 'register', component: RegisterComponent},
   { path: 'cart', component: CartComponent},
+  { path: 'category', component: CategoryComponent},
+  { path: 'recomendados', component: RecomendadoComponent},
+  { path: 'topventas', component: TopventasComponent},
   { path: '**', redirectTo:'home', pathMatch:'full'}
 
 ];

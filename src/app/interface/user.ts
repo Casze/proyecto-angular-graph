@@ -20,3 +20,7 @@ export interface UserLogeado{
 export interface UserLogeadoName{
     username:String
 }
+
+export interface UserNeo4j{
+    userId:String
+}

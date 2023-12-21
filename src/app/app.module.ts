@@ -13,6 +13,9 @@ import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { CartComponent } from './pages/cart/cart.component';
 import { RecommendComponent } from './components/recommend/recommend.component';
+import { TopventasComponent } from './pages/topventas/topventas.component';
+import { CategoryComponent } from './pages/category/category.component';
+import { RecomendadoComponent } from './pages/recomendado/recomendado.component';
 
 
 @NgModule({
@@ -26,6 +29,9 @@ import { RecommendComponent } from './components/recommend/recommend.component';
     RegisterComponent,
     CartComponent,
     RecommendComponent,
+    TopventasComponent,
+    CategoryComponent,
+    RecomendadoComponent,
   ],
   imports: [
     BrowserModule,

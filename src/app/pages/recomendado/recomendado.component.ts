@@ -1,14 +1,14 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ApiService } from '../../services/api/api.service';
-import { User, UserDocument, UserLogeado } from 'src/app/interface/user';
+import { Component } from '@angular/core';
+import { UserDocument, UserLogeado } from 'src/app/interface/user';
+import { ApiService } from 'src/app/services/api/api.service';
 import { LoginService } from 'src/app/services/auth/login.service';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  selector: 'app-recomendado',
+  templateUrl: './recomendado.component.html',
+  styleUrls: ['./recomendado.component.css']
 })
-export class HomeComponent implements OnInit {
+export class RecomendadoComponent {
   
   userLoginOn: boolean = false;
   userLoginOnUser: UserLogeado;  
@@ -16,6 +16,7 @@ export class HomeComponent implements OnInit {
 
   user: UserDocument;
   products: any[] = [];
+
 
   constructor(
     private apiService: ApiService,
@@ -27,16 +28,9 @@ export class HomeComponent implements OnInit {
     this.ObtenerUserLogeado();
 
     // Obtener los productos
-    this.ObtenerDataProducts();
+    this.ObtenerDataProductsRecomendados();
     // Obtener los usuarios
     //this.ObtenerDataUser();
-  }
-
-  ObtenerDataProducts(){
-    this.apiService.getProducts().subscribe(datos => {
-      this.products = datos;
-      console.log("Productos:",this.products);
-    });
   }
 
   ObtenerUserLogeado(){
@@ -59,8 +53,12 @@ export class HomeComponent implements OnInit {
     //console.log("Datos IDUser",this.userLoginOnUser);
     //console.log("Datos User:",this.userLoginOnUserName);
   }
-
-  
-}  
-  
-
+  ObtenerDataProductsRecomendados(){
+    console.log("PR id:",this.userLoginOnUser);
+    this.apiService.postrecommendProducts(String(this.userLoginOnUser)).subscribe(datos => {
+      console.log("PR datos:",datos);
+      this.products = datos;
+      console.log("Productos Recomendados:",this.products);
+    });
+  }
+}
