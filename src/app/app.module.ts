@@ -19,6 +19,7 @@ import { RecomendadoComponent } from './pages/recomendado/recomendado.component'
 import { DescubrirComponent } from './pages/descubrir/descubrir.component';
 import { CompradenuevoComponent } from './pages/compradenuevo/compradenuevo.component';
 import { SimisimilaresComponent } from './pages/simisimilares/simisimilares.component';
+import { ProductDetailsComponent } from './pages/product-details/product-details.component';
 
 
 @NgModule({
@@ -38,6 +39,7 @@ import { SimisimilaresComponent } from './pages/simisimilares/simisimilares.comp
     DescubrirComponent,
     CompradenuevoComponent,
     SimisimilaresComponent,
+    ProductDetailsComponent,
   ],
   imports: [
     BrowserModule,

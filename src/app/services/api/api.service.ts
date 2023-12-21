@@ -54,8 +54,8 @@ export class ApiService {
   /*            Neo4j           */
   /*============================*/
 
-  post_recordClick(idUser:String, IdProduct:String) : Observable<any>{
-    return this.http.post<any>(`${this.apiUrl}/neo4j/recordClick`,{userId:idUser,productId:IdProduct}).pipe(
+  post_recordClick(userId:String, productId:String) : Observable<any>{
+    return this.http.post<any>(`${this.apiUrl}/neo4j/recordClick`,{userId:userId,productId:productId}).pipe(
       tap((userData: any) => { 
           console.log("recordClick:",userData);
         }        

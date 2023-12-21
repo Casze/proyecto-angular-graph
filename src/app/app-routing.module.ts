@@ -13,6 +13,7 @@ import { TopventasComponent } from './pages/topventas/topventas.component';
 import { DescubrirComponent } from './pages/descubrir/descubrir.component';
 import { CompradenuevoComponent } from './pages/compradenuevo/compradenuevo.component';
 import { SimisimilaresComponent } from './pages/simisimilares/simisimilares.component';
+import { ProductDetailsComponent } from './pages/product-details/product-details.component';
 
 const routes: Routes = [
   { path: '', redirectTo:'home',pathMatch:'full'},
@@ -28,6 +29,7 @@ const routes: Routes = [
   { path: 'descubrir', component: DescubrirComponent},
   { path: 'comprardenuevo', component: CompradenuevoComponent},
   { path: 'simisimilares', component: SimisimilaresComponent},
+  { path: 'product-details/:id', component: ProductDetailsComponent },
   { path: '**', redirectTo:'home', pathMatch:'full'}
 
 ];

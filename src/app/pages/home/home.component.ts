@@ -9,9 +9,9 @@ import { LoginService } from 'src/app/services/auth/login.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  
+
   userLoginOn: boolean = false;
-  userLoginOnUser: UserLogeado;  
+  userLoginOnUser: UserLogeado;
   userLoginOnUserName: String = null;
 
   user: UserDocument;
@@ -19,8 +19,8 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private apiService: ApiService,
-    private loginService:LoginService
-    ) { }
+    private loginService: LoginService
+  ) { }
 
   ngOnInit(): void {
     // Obtener datos de usuario Logeado
@@ -32,27 +32,27 @@ export class HomeComponent implements OnInit {
     //this.ObtenerDataUser();
   }
 
-  ObtenerDataProducts(){
+  ObtenerDataProducts() {
     this.apiService.getProducts().subscribe(datos => {
       this.products = datos;
       //console.log("Productos:",this.products);
     });
   }
 
-  ObtenerUserLogeado(){
+  ObtenerUserLogeado() {
     this.loginService.currentUserLoginOn.subscribe({
-      next:(userLoginOn)=>{
-        this.userLoginOn=userLoginOn;
+      next: (userLoginOn) => {
+        this.userLoginOn = userLoginOn;
       }
     });
     this.loginService.currentUserId.subscribe({
-      next:(userLoginOnUser)=>{
-        this.userLoginOnUser=userLoginOnUser;
+      next: (userLoginOnUser) => {
+        this.userLoginOnUser = userLoginOnUser;
       }
-    });    
+    });
     this.loginService.currentUserData.subscribe({
-      next:(userLoginOnUserName)=>{
-        this.userLoginOnUserName=userLoginOnUserName;
+      next: (userLoginOnUserName) => {
+        this.userLoginOnUserName = userLoginOnUserName;
       }
     });
     //console.log("Logeado?",this.userLoginOn);
@@ -60,16 +60,21 @@ export class HomeComponent implements OnInit {
     //console.log("Datos User:",this.userLoginOnUserName);
   }
 
-  /*
-  recordClick(idUser:String, IdProduct:String){
-    this.apiService.post_recordClick.subscribe({
-      next:(userLoginOnUserName)=>{
-        this.userLoginOnUserName=userLoginOnUserName;
+
+  recordClick(IdProduct: String) {
+    console.log('Datos que entraron User',this.userLoginOnUser);
+    console.log('Datos que entraron Product',IdProduct);
+    this.apiService.post_recordClick(String(this.userLoginOnUser), String(IdProduct)).subscribe({
+      next: (response) => {
+        // Aquí puedes manejar la respuesta. Por ejemplo:
+        console.log('Click registrado con éxito', response);
+      },
+      error: (error) => {
+        // Aquí puedes manejar errores. Por ejemplo:
+        console.error('Error al registrar click', error);
       }
     });
   }
-  */
-  
-}  
-  
+}
+
 
