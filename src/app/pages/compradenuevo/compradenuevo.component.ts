@@ -56,7 +56,10 @@ export class CompradenuevoComponent implements OnInit {
   Obtener_recommendElectronicsProducts(Logeado: boolean) {
     if (Logeado) {
       this.apiService.post_recommendElectronicsProducts(String(this.userLoginOnUser)).subscribe(datos => {
-        this.electronics = datos;    
+        this.electronics = datos.map(producto => ({
+          ...producto,
+          _id: producto.id // Asumiendo que los productos vienen con una propiedad 'id'
+        }));    
       });
     }
     else {
@@ -68,7 +71,10 @@ export class CompradenuevoComponent implements OnInit {
   Obtener_recommendFurnitureProducts(Logeado: boolean) {
     if (Logeado) {
       this.apiService.post_recommendFurnitureProducts(String(this.userLoginOnUser)).subscribe(datos => {
-        this.furniture = datos;        
+        this.furniture = datos.map(producto => ({
+          ...producto,
+          _id: producto.id // Asumiendo que los productos vienen con una propiedad 'id'
+        }));       
       });
     }
     else {
@@ -81,7 +87,10 @@ export class CompradenuevoComponent implements OnInit {
   Obtener_recommendProductsClothes(Logeado: boolean) {
     if (Logeado) {
       this.apiService.post_recommendProductsClothes(String(this.userLoginOnUser)).subscribe(datos => {
-        this.clothes = datos;
+        this.clothes = datos.map(producto => ({
+          ...producto,
+          _id: producto.id // Asumiendo que los productos vienen con una propiedad 'id'
+        }));
       })
     }
     else {
@@ -125,5 +134,20 @@ export class CompradenuevoComponent implements OnInit {
     }
     // Este log se ejecutará antes de que las llamadas API se completen, por lo que 'this.clothes' aún no tendrá los datos nuevos
     // Mover cualquier lógica que dependa de 'this.clothes' lleno dentro de los bloques 'subscribe' correspondientes
+  }
+
+  recordClick(IdProduct: String) {
+    console.log('Datos que entraron User',this.userLoginOnUser);
+    console.log('Datos que entraron Product',IdProduct);
+    this.apiService.post_recordClick(String(this.userLoginOnUser), String(IdProduct)).subscribe({
+      next: (response) => {
+        // Aquí puedes manejar la respuesta. Por ejemplo:
+        console.log('Click registrado con éxito', response);
+      },
+      error: (error) => {
+        // Aquí puedes manejar errores. Por ejemplo:
+        console.error('Error al registrar click', error);
+      }
+    });
   }
 }

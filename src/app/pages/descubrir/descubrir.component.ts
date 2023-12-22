@@ -16,7 +16,7 @@ export class DescubrirComponent implements OnInit {
 
   user: UserDocument;
   products: any[] = [];
-
+  productsOpt: any[] = [];
 
   constructor(
     private apiService: ApiService,
@@ -54,16 +54,34 @@ export class DescubrirComponent implements OnInit {
     //console.log("Datos User:",this.userLoginOnUserName);
   }
   ObtenerDataProductsRecomendados(Logeado: boolean){
+    
     if (Logeado) {
       this.apiService.postrecommendProducts(String(this.userLoginOnUser)).subscribe(datos => {
-        this.products = datos;
+        this.products = datos.map(producto => ({
+          ...producto,
+          _id: producto.id // Asumiendo que los productos vienen con una propiedad 'id'
+        }));
       })
     }
     else {
-      this.apiService.getProductByCategory(String("Clothes")).subscribe(datos => {       
+      this.apiService.getProducts().subscribe(datos => {       
         this.products = datos;        
       });
     }
+  }
+  recordClick(IdProduct: String) {
+    console.log('Datos que entraron User',this.userLoginOnUser);
+    console.log('Datos que entraron Product',IdProduct);
+    this.apiService.post_recordClick(String(this.userLoginOnUser), String(IdProduct)).subscribe({
+      next: (response) => {
+        // Aquí puedes manejar la respuesta. Por ejemplo:
+        console.log('Click registrado con éxito', response);
+      },
+      error: (error) => {
+        // Aquí puedes manejar errores. Por ejemplo:
+        console.error('Error al registrar click', error);
+      }
+    });
   }
 }
 

@@ -13,6 +13,12 @@ export interface LoginRequest{
     password: String
 }
 
+export interface RegisterRequest{
+    username: String,
+    email: String,
+    password: String
+}
+
 export interface UserLogeado{
     _id:String
 }

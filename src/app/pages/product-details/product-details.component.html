@@ -1,6 +1,147 @@
-<p>product-details works!</p>
-<div *ngIf="product">
-    <h2>{{ product.name }}</h2>
-    <p>{{ product.description }}</p>
-    <!-- Más detalles del producto -->
-</div>
+<body>
+    <section style="background-color: #eee;">
+        <div class="container py-5">
+            <div class="container">
+                <div class="row">
+                    <div class="col text-center py-3"> <!-- Centrado horizontal y padding vertical -->
+                        <i class="fas fa-cubes fa-3x" style="color: #17a2b8;"></i>
+                        <!-- Icono más grande y color azul claro -->
+                        <h1 class="fw-bold d-inline-block ms-2" style="color: #17a2b8;">Producto</h1>
+                        <!-- Título más grande y color azul claro -->
+                    </div>
+                </div>
+            </div>
+            <h5>{{userLoginOn}}</h5>
+            <div class="row justify-content-center mb-3" *ngIf="products">
+                <div class="col-md-12 col-xl-10">
+                    <div class="card shadow-0 border rounded-3">
+
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-12 col-lg-3 col-xl-3 mb-4 mb-lg-0">
+                                    <div class="bg-image hover-zoom ripple rounded ripple-surface">
+                                        <!-- Asegúrate de que al usar link de products.image se reemplace con [src]="product.image" -->
+                                        <img src="https://i.etsystatic.com/32887768/r/il/528684/3732159293/il_570xN.3732159293_61i5.jpg"
+                                            class="w-100" />
+                                        <a href="#!">
+                                            <div class="hover-overlay">
+                                                <!-- La máscara añade un efecto de color sobre la imagen al pasar el mouse -->
+                                                <div class="mask" style="background-color: rgba(253, 253, 253, 0.15);">
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-lg-6 col-xl-6">
+                                    <h5>{{products.name}}</h5>
+                                    <div class="mt-1 text-muted small">
+                                        <span>Stock: {{products.inStock}}</span>
+                                    </div>
+                                    <div class="mt-1 text-muted small">
+                                        <span>SKU: {{products._id}}</span>
+                                    </div>
+                                    <div class="mb-1 text-muted small">
+                                        <span>Categoria: {{products.Category}}</span>
+                                    </div>
+                                    <p class=" mb-4 mb-md-0">
+                                        Descripcion: {{products.description}}
+                                    </p>
+                                </div>
+                                <div class="col-md-6 col-lg-3 col-xl-3 border-sm-start-none border-start">
+                                    <div class="d-flex flex-row align-items-center mb-1">
+                                        <h4 class="mb-1 me-1"> {{products.price}}</h4>
+                                    </div>
+                                    <h6 class="text-success">Free shipping</h6>
+                                    <div class="d-flex flex-column mt-4">
+                                        <!-- <button class="btn btn-primary btn-sm" type="button">Details</button> -->
+                                        <div class="d-flex flex-column mt-4" *ngIf="userLoginOn">
+                                            <!-- <button class="btn btn-primary btn-sm" type="button">Details</button> -->
+                                            <button class="btn btn-outline-primary btn-sm mt-2" type="button"
+                                                (click)="recordClick(products._id)">
+                                                Add to Cart
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section style="background-color: #eee;">
+        <div class="text-center py-5">
+            <i class="fas fa-cubes fa-3x" style="color: #17a2b8;"></i>
+            <h1 class="fw-bold mb-2" style="color: #17a2b8;">Productos Anteriormente Vistos</h1>
+        </div>
+        <div *ngIf="recomendados.length > 0" class="container py-5">
+            <div class="text-center mt-0">
+                <i class="fas fa-cubes fa-3x" style="color: #17a2b8;"></i>
+                <h1 class="fw-bold" style="color: #17a2b8;">Electronics Category</h1>
+            </div>
+
+            <!-- Carrusel de Productos -->
+            <div id="productCarousel" class="carousel slide" data-bs-ride="carousel">
+                <!-- Contenedor del Carrusel -->
+                <div class="carousel-inner">
+                    <div *ngFor="let product of recomendados; let isFirst = first" class="carousel-item"
+                        [class.active]="isFirst">
+                        <div class="card">
+                            <!-- Imagen del Producto -->
+                            <div class="bg-image hover-zoom ripple rounded ripple-surface">
+                                <img src="https://i.etsystatic.com/32887768/r/il/528684/3732159293/il_570xN.3732159293_61i5.jpg"
+                                    class="w-100" />
+                            </div>
+
+                            <div class="card-body">
+                                <!-- Detalles del Producto -->
+                                <div class="col-12 col-md-8">
+                                    <h5>{{product.name}}</h5>
+                                    <div class="text-muted small">
+                                        <span>Stock: {{product.inStock}}</span><br>
+                                        <span>SKU: {{product.id}}</span><br>
+                                        <span>Categoria: {{product.category}}</span>
+                                    </div>
+                                    <p>Descripcion: {{product.description}}</p>
+                                </div>
+
+                                <!-- Precio y Agregar al Carrito -->
+                                <div class="col-md-6 col-lg-3 col-xl-3">
+                                    <h4>{{product.price}}</h4>
+                                    <h6 class="text-success">Free shipping</h6>
+                                    <!-- Boton Detalles-->
+                                    <div class="d-flex flex-column mt-4">
+                                        <!-- <button class="btn btn-primary btn-sm" type="button">Details</button> -->
+                                        <button class="btn btn-outline-primary btn-sm mt-2" type="button"
+                                            [routerLink]="['/product-details', product._id]">Ver detalles</button>
+                                    </div>
+                                    <!-- Boton AddProduct-->
+                                    <div class="d-flex flex-column mt-4" *ngIf="userLoginOn">
+                                        <!-- <button class="btn btn-primary btn-sm" type="button">Details</button> -->
+                                        <button class="btn btn-outline-primary btn-sm mt-2" type="button"
+                                            (click)="recordClick(product._id)">
+                                            Add to Cart
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Controles del Carrusel -->
+                <button class="carousel-control-prev" type="button" data-bs-target="#productCarousel"
+                    data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#productCarousel"
+                    data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </div>
+    </section>
+</body>
